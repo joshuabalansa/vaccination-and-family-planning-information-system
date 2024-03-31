@@ -1,4 +1,4 @@
-<x-frontend-layout>
+<x-appointment-layout>
     <div class="flex flex-col justify-center items-center h-full w-full">
         <h1
             class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
@@ -7,4 +7,4 @@
             We'll keep you updated with all the necessary information leading up to your appointment.
         </p>
     </div>
-</x-frontend-layout>
+</x-appointment-layout>

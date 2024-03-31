@@ -1,4 +1,4 @@
-<x-frontend-layout>
+<x-appointment-layout>
     <center>
         <h2 class="p-5 mb-5 text-4xl font-extrabold dark:text-white">PUBLIC HEALTH VACCINATION</h2>
     </center>
@@ -115,4 +115,4 @@
             an Appointment</button>
     </form>
 
-</x-frontend-layout>
+</x-appointment-layout>
