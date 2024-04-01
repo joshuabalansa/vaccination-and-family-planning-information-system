@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('allergic_reaction')->nullable();
             $table->string('vaccine_type');
             $table->string('vaccine_center');
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

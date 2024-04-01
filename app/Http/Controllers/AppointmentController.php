@@ -14,7 +14,7 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        return view('admin.appointment.index');
+        return view('pages.appointment-page');
     }
 
     /**
@@ -55,10 +55,11 @@ class AppointmentController extends Controller
 
     /**
      * view successful page
+     * @return \Illiminate\View\View
      */
     public function successfulPage()
     {
         
-        return view('admin.appointment.success-page');
+        return view('pages.success-page');
     }
 }

@@ -1,10 +1,9 @@
-<x-appointment-layout>
+<x-app-layout>
     {{-- <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Appointments') }}
         </h2>
     </x-slot> --}}
-    {{-- @include('admin/includes/datatable-css') --}}
     <div class="container">
         <div class="row mt-5">
             <div class="col-12">
@@ -52,5 +51,4 @@
             </div><!-- end col-->
         </div>
     </div>
-    {{-- @include('admin/includes/datatable-js') --}}
-</x-appointment-layout>
+</x-app-layout>
