@@ -12,7 +12,7 @@ use App\Http\Controllers\AppointmentController;
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
-| 
+|
 */
 
 Route::get('/', function () {
@@ -27,14 +27,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
+
 });
+
 
 /**
  *  Appointment Routes
  */
-
-
 Route::get('appointment', [AppointmentController::class, 'index'])->name('appointment.index');
 
 Route::middleware(['auth', 'auth.admin'])->group(function() {
@@ -48,8 +47,9 @@ Route::middleware(['auth', 'auth.admin'])->group(function() {
 Route::middleware(['auth', 'auth.patient'])->group(function() {
     Route::get('/patient', function() {
         return 1;
-    });
+    })->name('patient');
 });
+
 
 
 require __DIR__.'/auth.php';
