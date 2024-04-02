@@ -32,14 +32,14 @@ class AuthenticatedSessionController extends Controller
 
         $role = Auth::user()->role;
 
-        if ($role == 1) {
+        // if ($role == 1) {
 
             return redirect()->intended(RouteServiceProvider::HOME);
 
-        } elseif ($role == 2) {
+        // } elseif ($role == 2) {
 
-            return redirect('/patient');
-        }
+        //     return redirect('/patient');
+        // }
     }
 
     /**

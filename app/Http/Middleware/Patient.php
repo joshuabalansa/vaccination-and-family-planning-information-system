@@ -23,7 +23,7 @@ class Patient
 
         } else {
 
-            return redirect('/')->with('error', 'You do not have access');
+            return redirect()->back()->with('error', 'You do not have access to this page');
         }
     }
 }

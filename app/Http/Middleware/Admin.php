@@ -22,7 +22,7 @@ class Admin
 
         } else {
 
-            return redirect('/')->with('error', 'You do not have admin access.');
+            return redirect()->back()->with('error', 'You do not have admin access.');
         }
     }
 }
