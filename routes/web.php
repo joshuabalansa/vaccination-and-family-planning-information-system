@@ -31,9 +31,8 @@ Route::middleware('auth')->group(function () {
 });
 
 
-/**
- *  Appointment Routes
- */
+
+# Appointment Routes Middleware
 Route::get('appointment', [AppointmentController::class, 'index'])->name('appointment.index');
 
 Route::middleware(['auth', 'auth.admin'])->group(function() {
@@ -44,11 +43,10 @@ Route::middleware(['auth', 'auth.admin'])->group(function() {
     });
 });
 
-Route::middleware(['auth', 'auth.patient'])->group(function() {
-    Route::get('/patient', function() {
-        return 1;
-    })->name('patient');
-});
+# Patient Routes Middleware
+// Route::middleware(['auth', 'auth.patient'])->group(function() {
+  
+// });
 
 
 
