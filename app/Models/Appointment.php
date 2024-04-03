@@ -76,7 +76,7 @@ class Appointment extends Model
         return  $this->allergic_reaction;
     }
 
-    
+
      /**
      * get date and time function
      *
@@ -100,7 +100,7 @@ class Appointment extends Model
         return  $this->vaccine_type;
     }
 
-    
+
     /**
      * get vaccine_center function
      *
@@ -109,6 +109,16 @@ class Appointment extends Model
     public function getVaccineCenter() {
 
         return  $this->vaccine_center;
+    }
+
+
+    /**
+     * get appointment status
+     * @return string
+     */
+    public function getStatus() {
+
+        return ucfirst($this->status);
     }
 
 }

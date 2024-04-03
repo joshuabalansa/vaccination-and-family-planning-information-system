@@ -45,7 +45,9 @@
                         <td class="px-3 py-2 sm:px-6 sm:py-4">{{ $appointment->getDateTime('time') }}</td>
                         <td class="px-3 py-2 sm:px-6 sm:py-4">{{ $appointment->getVaccineType() }}</td>
                         <td class="px-3 py-2 sm:px-6 sm:py-4">{{ $appointment->getVaccineCenter() }}</td>
-                        <td class="px-3 py-2 sm:px-6 sm:py-4">Pending</td>
+                        <td class="px-3 py-2 sm:px-6 sm:py-4">
+                            <span class="{{ $appointment->getStatus() === 'Accepted' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300' }} text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">{{ $appointment->getStatus() }}</span>
+                        </td>
                         <td class="px-3 py-2 sm:px-6 sm:py-4">
                             <button id="dropdownMenuIconHorizontalButton"
                                 data-dropdown-toggle="dropdownDotsHorizontal{{ $loop->index }}"
@@ -64,7 +66,7 @@
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
                                     aria-labelledby="dropdownMenuIconHorizontalButton">
                                     <li>
-                                        <a href="#"
+                                        <a href="{{ route('appointment.accept', $appointment->id) }}"
                                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Accept</a>
                                     </li>
                                     <li>

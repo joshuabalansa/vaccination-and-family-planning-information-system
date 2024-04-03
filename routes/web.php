@@ -37,15 +37,16 @@ Route::get('appointment', [AppointmentController::class, 'index'])->name('appoin
 
 Route::middleware(['auth', 'auth.admin'])->group(function() {
     Route::prefix('appointment')->group(function () {
-        Route::post('/register', [AppointmentController::class, 'register'])->name('appointment.register');
-        Route::get('/records',  [AppointmentController::class, 'appointmentRecords'])->name('appointment.records');
-        Route::get('/success',  [AppointmentController::class, 'successfulPage'])->name('appointment.success');
+        Route::post('register', [AppointmentController::class, 'register'])->name('appointment.register');
+        Route::get('records',  [AppointmentController::class, 'appointmentRecords'])->name('appointment.records');
+        Route::get('success',  [AppointmentController::class, 'successfulPage'])->name('appointment.success');
+        Route::get('accept/{appointment}',  [AppointmentController::class, 'accept'])->name('appointment.accept');
     });
 });
 
 # Patient Routes Middleware
 // Route::middleware(['auth', 'auth.patient'])->group(function() {
-  
+
 // });
 
 

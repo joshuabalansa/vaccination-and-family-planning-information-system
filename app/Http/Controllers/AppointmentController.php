@@ -25,7 +25,7 @@ class AppointmentController extends Controller
     public function register(AppointmentRequest $request)
     {
         try {
-            
+
             $validatedData = $request->validated();
 
             $createAppointment = Appointment::create($validatedData);
@@ -40,7 +40,7 @@ class AppointmentController extends Controller
             return redirect()->back()->with('error', 'Oops! Something went wrong. ' . $e->getMessage());
         }
     }
-       
+
     /**
      * Retrieve all appointment Records
      * @return \Illuminate\View\View
@@ -59,7 +59,30 @@ class AppointmentController extends Controller
      */
     public function successfulPage()
     {
-        
+
         return view('pages.success-page');
+    }
+
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function accept(Appointment $appointment) {
+
+        try {
+
+            $accepted = Appointment::where('id', $appointment->id)->update(['status' => 'accepted']);
+
+            if ($accepted) {
+
+                return redirect()->back()->with('succes', 'Appointment accepted!');
+            }
+
+        } catch (\Exception $e) {
+
+            return redirect()->back()->with('error', 'Opps! Something went wrong. ' . $e->getMessage());
+        }
+
+
     }
 }
