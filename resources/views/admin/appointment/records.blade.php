@@ -70,16 +70,16 @@
                                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Accept</a>
                                     </li>
                                     <li>
-                                        <a href="#"
+                                        <a href="{{ route('appointment.cancel', $appointment->id) }}"
                                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cancel</a>
                                     </li>
                                     <li>
-                                        <a href="#"
+                                        <a href="{{ route('appointment.remove', $appointment->id) }}"
                                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
                                     </li>
                                 </ul>
                                 <div class="py-2">
-                                    <a href="#"
+                                    <a href="{{ route('appointment.show', $appointment->id) }}"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Show
                                         All</a>
                                 </div>

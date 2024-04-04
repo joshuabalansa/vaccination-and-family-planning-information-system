@@ -41,6 +41,9 @@ Route::middleware(['auth', 'auth.admin'])->group(function() {
         Route::get('records',  [AppointmentController::class, 'appointmentRecords'])->name('appointment.records');
         Route::get('success',  [AppointmentController::class, 'successfulPage'])->name('appointment.success');
         Route::get('accept/{appointment}',  [AppointmentController::class, 'accept'])->name('appointment.accept');
+        Route::get('cancel/{appointment}',  [AppointmentController::class, 'cancel'])->name('appointment.cancel');
+        Route::get('remove/{appointment}',  [AppointmentController::class, 'remove'])->name('appointment.remove');
+        Route::get('show/{appointment}',  [AppointmentController::class, 'show'])->name('appointment.show');
     });
 });
 

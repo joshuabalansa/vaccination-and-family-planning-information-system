@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Appointment;
 use App\Http\Requests\AppointmentRequest;
 
@@ -20,7 +19,7 @@ class AppointmentController extends Controller
     /**
      * Register.
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function register(AppointmentRequest $request)
     {
@@ -65,24 +64,94 @@ class AppointmentController extends Controller
 
 
     /**
-     * @return \Illuminate\View\View
+     * Update an appointment to "accepted"
+     *
+     * @param \App\Models\Appointment $appointment
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function accept(Appointment $appointment) {
+    public function accept(Appointment $appointment)
+    {
 
         try {
 
-            $accepted = Appointment::where('id', $appointment->id)->update(['status' => 'accepted']);
+            $appointment->status = 'accepted';
 
-            if ($accepted) {
+            if ($appointment->save()) {
 
                 return redirect()->back()->with('succes', 'Appointment accepted!');
+
             }
 
         } catch (\Exception $e) {
 
             return redirect()->back()->with('error', 'Opps! Something went wrong. ' . $e->getMessage());
         }
+    }
 
+    /**
+     * Update an appointment to "cancelled"
+     *
+     * @param \App\Models\Appointment $appointment
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function cancel(Appointment $appointment)
+    {
 
+        try {
+
+            $appointment->status = 'cancelled';
+
+            if ($appointment->save()) {
+
+                return redirect()->back()->with('success', 'Appointment has been cancelled');
+            }
+
+        } catch (\Exception $e) {
+
+            return redirect()->back()->with('error', 'Opps! Something went wrong. ' . $e->getMessage());
+        }
+    }
+
+     /**
+     * remove appointment
+     *
+     * @param \App\Models\Appointment $appointment
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function remove(Appointment $appointment)
+    {
+
+        try {
+
+            $remove = $appointment->delete();
+
+            if ($remove) {
+
+                return redirect()->back()->with('success', 'Appointment has been deleted');
+            }
+
+        } catch (\Exception $e) {
+
+            return redirect()->back()->with('error', 'Opps! Something went wrong. ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * show appointment
+     *
+     * @param \App\Models\Appointment $appointment
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function show(Appointment $appointment)
+    {
+
+        try {
+
+            dd($appointment);
+
+        } catch (\Exception $e) {
+
+            return redirect()->back()->with('error', 'Opps! Something went wrong. ' . $e->getMessage());
+        }
     }
 }
