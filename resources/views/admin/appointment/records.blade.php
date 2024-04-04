@@ -7,13 +7,13 @@
         </div>
         <div>
 
-            <form class="max-w-md mx-auto">
+            <form method="GET" action="{{ route('appointment.records') }}" class="max-w-md mx-auto">
                 <label for="default-search"
                     class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                 <div class="relative">
-                    <input type="search" id="default-search"
+                    <input type="search" name="search" id="default-search"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500""
-                        placeholder="Search..." required />
+                        placeholder="Search..." />
                 </div>
             </form>
 
@@ -46,7 +46,8 @@
                         <td class="px-3 py-2 sm:px-6 sm:py-4">{{ $appointment->getVaccineType() }}</td>
                         <td class="px-3 py-2 sm:px-6 sm:py-4">{{ $appointment->getVaccineCenter() }}</td>
                         <td class="px-3 py-2 sm:px-6 sm:py-4">
-                            <span class="{{ $appointment->getStatus() === 'Accepted' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300' }} text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">{{ $appointment->getStatus() }}</span>
+                            <span
+                                class="{{ $appointment->getStatus() === 'Accepted' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300' }} text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">{{ $appointment->getStatus() }}</span>
                         </td>
                         <td class="px-3 py-2 sm:px-6 sm:py-4">
                             <button id="dropdownMenuIconHorizontalButton"
@@ -66,7 +67,8 @@
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
                                     aria-labelledby="dropdownMenuIconHorizontalButton">
                                     <li>
-                                        <a href="{{ route('appointment.accept', $appointment->id) }}"
+                                        <a href="#" data-modal-target="confirmation-modal-{{ $loop->index }}"
+                                            data-modal-toggle="confirmation-modal-{{ $loop->index }}"
                                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Accept</a>
                                     </li>
                                     <li>
@@ -86,6 +88,12 @@
                             </div>
                         </td>
                     </tr>
+
+                    {{-- Modal --}}
+                    @include('components.confirmation-modal', [
+                        'link' => route('appointment.accept', $appointment->id),
+                        'loopIndex' => $loop->index,
+                    ])
                 @endforeach
             </tbody>
         </table>
@@ -94,4 +102,6 @@
     <div class="mt-5">
         {{ $appointments->links() }}
     </div>
+
+
 </x-app-layout>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Http\Requests\AppointmentRequest;
+use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
 {
@@ -11,9 +12,9 @@ class AppointmentController extends Controller
      * Display a listing of the resource.
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function vaccinationPage()
     {
-        return view('pages.appointment-page');
+        return view('pages.vaccination-page');
     }
 
     /**
@@ -44,10 +45,21 @@ class AppointmentController extends Controller
      * Retrieve all appointment Records
      * @return \Illuminate\View\View
      */
-    public function appointmentRecords()
+    public function appointmentRecords(Request $request)
     {
 
-        $appointments = Appointment::paginate(10);
+        if ($request->has('search')) {
+
+            $search = $request->search;
+
+            $appointments = Appointment::where('name', 'like', '%' . $search . '%')
+            ->orWhere('status', 'like', '%' . $search . '%')
+            ->paginate(10);
+
+        } else {
+
+            $appointments = Appointment::paginate(10);
+        }
 
         return view('admin.appointment.records', compact('appointments'));
     }
@@ -78,7 +90,7 @@ class AppointmentController extends Controller
 
             if ($appointment->save()) {
 
-                return redirect()->back()->with('succes', 'Appointment accepted!');
+                return redirect()->back()->with('success', 'Appointment accepted!');
 
             }
 

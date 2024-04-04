@@ -32,13 +32,14 @@ Route::middleware('auth')->group(function () {
 
 
 
-# Appointment Routes Middleware
-Route::get('appointment', [AppointmentController::class, 'index'])->name('appointment.index');
+Route::get('vaccination', [AppointmentController::class, 'vaccinationPage'])->name('vaccination.index');
 
+# Appointment Routes Middleware
 Route::middleware(['auth', 'auth.admin'])->group(function() {
     Route::prefix('appointment')->group(function () {
         Route::post('register', [AppointmentController::class, 'register'])->name('appointment.register');
         Route::get('records',  [AppointmentController::class, 'appointmentRecords'])->name('appointment.records');
+        // Route::get('search',  [AppointmentController::class, 'search'])->name('appointment.search');
         Route::get('success',  [AppointmentController::class, 'successfulPage'])->name('appointment.success');
         Route::get('accept/{appointment}',  [AppointmentController::class, 'accept'])->name('appointment.accept');
         Route::get('cancel/{appointment}',  [AppointmentController::class, 'cancel'])->name('appointment.cancel');
