@@ -1,3 +1,6 @@
+@php
+    $role = auth()->user()->role;
+@endphp
 <nav class="fixed top-0  z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
     <div class="px-3 py-3 lg:px-5 lg:pl-3 mb-5 ">
         <div class="flex items-center justify-between">
@@ -92,7 +95,8 @@
 
                 </a>
             </li>
-            @if (auth()->user()->role == 1)
+
+            @can('view-appointments')
                 <li>
                     <a href="{{ route('appointment.records') }}"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -107,7 +111,8 @@
                             class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ \App\Models\Appointment::all()->count() }}</span>
                     </a>
                 </li>
-            @endif
+            @endcan
+
             <li>
                 <a href="#"
                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
