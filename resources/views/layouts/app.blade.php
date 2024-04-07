@@ -18,11 +18,11 @@
 </head>
 
 <body class="font-sans antialiased">
-    
+
 
     @include('layouts.navigation')
 
-    <div style="margin-top: 100px;" class="p-5 sm:ml-64 ">
+    <div style="margin-top: 50px;" class="p-5 sm:ml-64 ">
         {{ $slot }}
     </div>
 

@@ -35,24 +35,24 @@ Route::middleware('auth')->group(function () {
 Route::get('vaccination', [AppointmentController::class, 'vaccinationPage'])->name('vaccination.index');
 
 # Appointment Routes Middleware
-Route::middleware(['auth', 'auth.admin'])->group(function() {
-    Route::prefix('appointment')->group(function () {
-        Route::post('register', [AppointmentController::class, 'register'])->name('appointment.register');
-        Route::get('records',  [AppointmentController::class, 'appointmentRecords'])->name('appointment.records');
-        // Route::get('search',  [AppointmentController::class, 'search'])->name('appointment.search');
-        Route::get('success',  [AppointmentController::class, 'successfulPage'])->name('appointment.success');
-        Route::get('accept/{appointment}',  [AppointmentController::class, 'accept'])->name('appointment.accept');
-        Route::get('cancel/{appointment}',  [AppointmentController::class, 'cancel'])->name('appointment.cancel');
-        Route::get('remove/{appointment}',  [AppointmentController::class, 'remove'])->name('appointment.remove');
-        Route::get('show/{appointment}',  [AppointmentController::class, 'show'])->name('appointment.show');
-    });
+Route::prefix('appointment')->group(function () {
+    Route::get('records',  [AppointmentController::class, 'appointmentRecords'])->name('appointment.records');
+    Route::post('register', [AppointmentController::class, 'register'])->name('appointment.register');
+    Route::get('success',  [AppointmentController::class, 'successfulPage'])->name('appointment.success');
+    Route::get('accept/{appointment}',  [AppointmentController::class, 'accept'])->name('appointment.accept');
+    Route::get('cancel/{appointment}',  [AppointmentController::class, 'cancel'])->name('appointment.cancel');
+    Route::get('remove/{appointment}',  [AppointmentController::class, 'remove'])->name('appointment.remove');
+    Route::get('show/{appointment}',  [AppointmentController::class, 'show'])->name('appointment.show');
 });
 
 # Patient Routes Middleware
 // Route::middleware(['auth', 'auth.patient'])->group(function() {
-
+//     Route::prefix('appointment')->group(function () {
+       
+//         Route::get('records',  [AppointmentController::class, 'appointmentRecords'])->name('appointment.records');
+       
+//     });
 // });
 
-
-
 require __DIR__.'/auth.php';
+

@@ -48,13 +48,20 @@ class AppointmentController extends Controller
     public function appointmentRecords(Request $request)
     {
 
+        $this->authorize('viewAppointments', Appointment::class);
+
         if ($request->has('search')) {
 
-            $search = $request->search;
+            $search = $request->input('search');
 
-            $appointments = Appointment::where('name', 'like', '%' . $search . '%')
-            ->orWhere('status', 'like', '%' . $search . '%')
-            ->paginate(10);
+            $appointments = Appointment::query();
+        
+            if ($search) {
+                $appointments->where('name', 'like', '%' . $search . '%')
+                             ->orWhere('status', 'like', '%' . $search . '%');
+            }
+        
+            $appointments = $appointments->paginate(10);
 
         } else {
 
