@@ -12,20 +12,31 @@ class Appointment extends Model
 
     protected $fillable = [
         'firstname',
+        'middlename',
         'lastname',
-        'age',
-        'allergic_reaction',
-        'phone',
-        'street',
+        'birthdate',
+        'time',
+        'bw',
+        'bl',
         'city',
         'brgy',
-        'zipcode',
-        'date',
-        'time',
-        'vaccine_type',
-        'vaccine_center',
+        'phone',
+        'g',
+        'p',
+        'a',
+        'lb',
+        'd',
+        'philhealth',
+        '4ps_number',
+        'm_name',
+        'm_birthdate',
+        'm_age',
+        'm_occupation',
+        'f_name',
+        'f_birthdate',
+        'f_age',
+        'f_occupation',
     ];
-
     /**
      * get name function
      *

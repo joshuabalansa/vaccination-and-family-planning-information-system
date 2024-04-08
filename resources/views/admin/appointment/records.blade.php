@@ -19,7 +19,7 @@
 
         </div>
     </div>
-    <div class="relative shadow-md sm:rounded-lg overflow-visible">
+    <div class="mb-3 relative shadow-md sm:rounded-lg overflow-visible">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
@@ -99,11 +99,11 @@
         </table>
 
     </div>
-    <span style="text-align: center">{{ $appointments->count() === 0 ? 'No Records Found' : '' }}</span>
+    <center>
+        <span style="text-align: center">{{ $appointments->count() === 0 ? 'No Records Found' : '' }}</span>
+    </center>
 
-    <div class="mt-5">
+    <div class="mt-3">
         {{ $appointments->links() }}
     </div>
-
-
 </x-app-layout>

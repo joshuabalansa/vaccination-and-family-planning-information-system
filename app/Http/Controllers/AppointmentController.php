@@ -12,9 +12,9 @@ class AppointmentController extends Controller
      * Display a listing of the resource.
      * @return \Illuminate\View\View
      */
-    public function vaccinationPage()
+    public function appointmentPage()
     {
-        return view('pages.vaccination-page');
+        return view('pages.appointment-page');
     }
 
     /**
@@ -24,6 +24,7 @@ class AppointmentController extends Controller
      */
     public function register(AppointmentRequest $request)
     {
+
         try {
 
             $validatedData = $request->validated();
@@ -57,7 +58,8 @@ class AppointmentController extends Controller
             $appointments = Appointment::query();
         
             if ($search) {
-                $appointments->where('name', 'like', '%' . $search . '%')
+                $appointments->where('firstname', 'like', '%' . $search . '%')
+                             ->orWhere('lastname', 'like', '%' . $search . '%')
                              ->orWhere('status', 'like', '%' . $search . '%');
             }
         

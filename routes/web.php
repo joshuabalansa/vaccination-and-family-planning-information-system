@@ -32,10 +32,10 @@ Route::middleware('auth')->group(function () {
 
 
 
-Route::get('vaccination', [AppointmentController::class, 'vaccinationPage'])->name('vaccination.index');
 
 # Appointment Routes Middleware
 Route::prefix('appointment')->group(function () {
+    Route::get('/', [AppointmentController::class, 'appointmentPage'])->name('appointment.index');
     Route::get('records',  [AppointmentController::class, 'appointmentRecords'])->name('appointment.records');
     Route::post('register', [AppointmentController::class, 'register'])->name('appointment.register');
     Route::get('success',  [AppointmentController::class, 'successfulPage'])->name('appointment.success');
