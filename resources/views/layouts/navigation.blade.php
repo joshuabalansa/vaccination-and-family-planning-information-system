@@ -19,11 +19,9 @@
             <img src="https://placehold.co/400" class="h-6 me-3 sm:h-7" alt="Flowbite Logo" />
             <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
                 @if (auth()->user()->role === 1)
-                    ADMIN
-                @elseif(auth()->user()->role === 2)
-                    PATIENT
+                    Admin
                 @else
-                    HEALTHCARE
+                    {{ auth()->user()->email }}
                 @endif
             </span>
         </a>
@@ -56,7 +54,7 @@
 
                         <span class="flex-1 ms-3 whitespace-nowrap">Appointments</span>
                         <span
-                            class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ \App\Models\Appointment::all()->count() }}</span>
+                            class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ \App\Models\Appointment::where(['status' => 'pending'])->count() }}</span>
                     </a>
                 </li>
             @endcan
@@ -129,7 +127,7 @@
 
         <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
             <li>
-                <a href="#"
+                <a href="{{ route('profile.edit') }}"
                     class="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">

@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Appointment;
 use App\Http\Requests\AppointmentRequest;
 use Illuminate\Http\Request;
+use App\Traits\SendNotificationTrait;
 
 class AppointmentController extends Controller
 {
+
+    use SendNotificationTrait;
+
     /**
      * Display a listing of the resource.
      * @return \Illuminate\View\View
