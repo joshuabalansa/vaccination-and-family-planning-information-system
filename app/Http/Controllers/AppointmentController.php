@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Appointment;
 use App\Http\Requests\AppointmentRequest;
 use Illuminate\Http\Request;
+use App\Models\User;
 use App\Traits\SendNotificationTrait;
+use Illuminate\Support\Facades\Hash;
 
 class AppointmentController extends Controller
 {
@@ -47,7 +49,8 @@ class AppointmentController extends Controller
     }
 
     /**
-     * Retrieve all appointment Records
+     * Retrieve and search appointment Records
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\View\View
      */
     public function appointmentRecords(Request $request)
@@ -99,7 +102,19 @@ class AppointmentController extends Controller
 
         try {
 
+            if ($appointment->status === 'pending') {
+
+                $name = $appointment->firstname . ' ' . $appointment->lastname;
+
+                $password = rand(999999,9999999);
+
+                $this->createUser($name, $password);
+
+                $this->sendMessageNotification($appointment->phone, "Your appointment has been confirmed! you will be notify before your appointment schedule, you can use this password to login $password and your email");
+            }
+
             $appointment->status = 'accepted';
+    
 
             if ($appointment->save()) {
 
@@ -111,6 +126,23 @@ class AppointmentController extends Controller
 
             return redirect()->back()->with('error', 'Opps! Something went wrong. ' . $e->getMessage());
         }
+    }
+
+    /**
+     * create user function
+     *
+     * @param string $name
+     * @param string $password
+     * @return void
+     */
+    public function createUser($name, $password) {
+
+        User::create([
+            'name'     => $name,
+            'email'    => 'joshua@joshua.com',
+            'role'     => 2,
+            'password' => Hash::make($password),
+        ]);
     }
 
     /**
