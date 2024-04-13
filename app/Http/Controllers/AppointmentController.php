@@ -105,17 +105,16 @@ class AppointmentController extends Controller
             if ($appointment->status === 'pending') {
 
                 $name = $appointment->firstname . ' ' . $appointment->lastname;
-
+                $email = rand(999, 999999);
                 $password = rand(999999,9999999);
 
-                $this->createUser($name, $password);
+                $this->createUser($name,$email, $password);
 
-                $this->sendMessageNotification($appointment->phone, "Your appointment has been confirmed! you will be notify before your appointment schedule, you can use this password to login $password and your email");
+                $this->sendMessageNotification($appointment->phone, "Email: $email Password: $password");
             }
 
             $appointment->status = 'accepted';
     
-
             if ($appointment->save()) {
 
                 return redirect()->back()->with('success', 'Appointment accepted!');
@@ -135,11 +134,11 @@ class AppointmentController extends Controller
      * @param string $password
      * @return void
      */
-    public function createUser($name, $password) {
+    public function createUser($name, $email, $password) {
 
         User::create([
             'name'     => $name,
-            'email'    => 'joshua@joshua.com',
+            'email'    => $email,
             'role'     => 2,
             'password' => Hash::make($password),
         ]);

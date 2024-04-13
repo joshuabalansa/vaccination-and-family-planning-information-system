@@ -1,186 +1,63 @@
 <x-app-layout>
-    <div class="flex flex-col md:flex-row md:justify-center">
+    <div class="row">
+        <div class="col-sm-3 col-xs-6">
 
-        @can('view-appointments', \App\Models\Appointment::class)
-            <a href="{{ route('appointment.records') }}"
-                class="w-full m-2 md:w-1/4 block max-w-sm p-6 mb-4 md:mb-0 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <div class="tile-stats tile-red">
+                <div class="icon"><i class="entypo-users"></i></div>
+                <div class="num" data-start="0"
+                    data-end="{{ \App\Models\Appointment::where(['status' => 'pending'])->count() }}" data-postfix=""
+                    data-duration="1500" data-delay="0">0</div>
 
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    {{ \App\Models\Appointment::where('status', 'pending')->count() }}
-                </h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">Appointments</p>
-            </a>
-        @endcan
-
-        <a href="#"
-            class="w-full m-2 md:w-1/4 block max-w-sm p-6 mb-4 md:mb-0 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">34</h5>
-            <p class="font-normal text-gray-700 dark:text-gray-400">Available Vaccines</p>
-        </a>
-
-        <a href="#"
-            class="w-full m-2 md:w-1/4 block max-w-sm p-6 mb-4 md:mb-0 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                {{ \App\Models\Appointment::where('status', 'accepted')->count() }}
-            </h5>
-            <p class="font-normal text-gray-700 dark:text-gray-400">Patients</p>
-        </a>
-
-        <a href="#"
-            class="w-full m-2 md:w-1/4 block max-w-sm p-6 mb-4 md:mb-0 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">5</h5>
-            <p class="font-normal text-gray-700 dark:text-gray-400">Doctors</p>
-        </a>
-    </div>
-
-
-    <div class="mt-5 max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-        <div class="flex justify-between">
-            <div>
-                <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">32.4k</h5>
-                <p class="text-base font-normal text-gray-500 dark:text-gray-400">Users this week</p>
+                <h3>Pending Appointments</h3>
+                <p>Showing all pending applicants</p>
             </div>
-            <div
-                class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center">
-                12%
-                <svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 10 14">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M5 13V1m0 0L1 5m4-4 4 4" />
-                </svg>
-            </div>
+
         </div>
-        <div id="area-chart"></div>
-        <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
-            <div class="flex justify-between items-center pt-5">
-                <!-- Button -->
-                <button id="dropdownDefaultButton" data-dropdown-toggle="lastDaysdropdown"
-                    data-dropdown-placement="bottom"
-                    class="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 text-center inline-flex items-center dark:hover:text-white"
-                    type="button">
-                    Last 7 days
-                    <svg class="w-2.5 m-2.5 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 10 6">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m1 1 4 4 4-4" />
-                    </svg>
-                </button>
-                <!-- Dropdown menu -->
-                <div id="lastDaysdropdown"
-                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Yesterday</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Today</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last
-                                7 days</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last
-                                30 days</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last
-                                90 days</a>
-                        </li>
-                    </ul>
+
+        <div class="col-sm-3 col-xs-6">
+
+            <div class="tile-stats tile-green">
+                <div class="icon"><i class="entypo-chart-bar"></i></div>
+                <div class="num" data-start="0"
+                    data-end="{{ \App\Models\Appointment::where(['status' => 'accepted'])->count() }}" data-postfix=""
+                    data-duration="1500" data-delay="600">
+                    0
                 </div>
-                <a href="#"
-                    class="uppercase text-sm font-semibold inline-flex items-center rounded-lg text-blue-600 hover:text-blue-700 dark:hover:text-blue-500  hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-3 py-2">
-                    Users Report
-                    <svg class="w-2.5 h-2.5 ms-1.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 6 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m1 9 4-4-4-4" />
-                    </svg>
-                </a>
+
+                <h3>Patients</h3>
+                <p>this is the all patient.</p>
             </div>
+
+        </div>
+
+        <div class="clear visible-xs"></div>
+
+        <div class="col-sm-3 col-xs-6">
+
+            <div class="tile-stats tile-aqua">
+                <div class="icon"><i class="entypo-box"></i></div>
+                <div class="num" data-start="0" data-end="23" data-postfix="" data-duration="1500"
+                    data-delay="1200">0
+                </div>
+
+                <h3>Vaccines</h3>
+                <p>Available Vaccines.</p>
+            </div>
+
+        </div>
+
+        <div class="col-sm-3 col-xs-6">
+
+            <div class="tile-stats tile-blue">
+                <div class="icon"><i class="entypo-rss"></i></div>
+                <div class="num" data-start="0" data-end="52" data-postfix="" data-duration="1500"
+                    data-delay="1800">0
+                </div>
+
+                <h3>Doctors</h3>
+                <p>Availble doctors and nurses</p>
+            </div>
+
         </div>
     </div>
-
-    <script>
-        const options = {
-            chart: {
-                height: "100%",
-                maxWidth: "100%",
-                type: "area",
-                fontFamily: "Inter, sans-serif",
-                dropShadow: {
-                    enabled: false,
-                },
-                toolbar: {
-                    show: false,
-                },
-            },
-            tooltip: {
-                enabled: true,
-                x: {
-                    show: false,
-                },
-            },
-            fill: {
-                type: "gradient",
-                gradient: {
-                    opacityFrom: 0.55,
-                    opacityTo: 0,
-                    shade: "#1C64F2",
-                    gradientToColors: ["#1C64F2"],
-                },
-            },
-            dataLabels: {
-                enabled: false,
-            },
-            stroke: {
-                width: 6,
-            },
-            grid: {
-                show: false,
-                strokeDashArray: 4,
-                padding: {
-                    left: 2,
-                    right: 2,
-                    top: 0
-                },
-            },
-            series: [{
-                name: "New users",
-                data: [6500, 6418, 6456, 6526, 6356, 6456],
-                color: "#1A56DB",
-            }, ],
-            xaxis: {
-                categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February',
-                    '07 February'
-                ],
-                labels: {
-                    show: false,
-                },
-                axisBorder: {
-                    show: false,
-                },
-                axisTicks: {
-                    show: false,
-                },
-            },
-            yaxis: {
-                show: false,
-            },
-        }
-
-        if (document.getElementById("area-chart") && typeof ApexCharts !== 'undefined') {
-            const chart = new ApexCharts(document.getElementById("area-chart"), options);
-            chart.render();
-        }
-    </script>
 </x-app-layout>

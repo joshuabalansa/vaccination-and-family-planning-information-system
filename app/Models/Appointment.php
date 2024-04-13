@@ -64,7 +64,7 @@ class Appointment extends Model
      */
     public function getPhone() {
 
-        return  $this->age;
+        return  $this->phone;
     }
 
     /**
@@ -90,7 +90,7 @@ class Appointment extends Model
 
      /**
      * get date and time function
-     *
+     * @param string $dateTime get date or time
      * @return string
      */
     public function getDateTime($dateTime) {

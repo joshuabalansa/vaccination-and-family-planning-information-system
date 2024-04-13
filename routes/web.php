@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\PatientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,10 @@ Route::prefix('appointment')->group(function () {
     Route::get('cancel/{appointment}',  [AppointmentController::class, 'cancel'])->name('appointment.cancel');
     Route::get('remove/{appointment}',  [AppointmentController::class, 'remove'])->name('appointment.remove');
     Route::get('show/{appointment}',  [AppointmentController::class, 'show'])->name('appointment.show');
+});
+
+Route::prefix('patient')->group(function () {
+    Route::get('/', [PatientController::class, 'index'])->name('patient.index');
 });
 
 # Patient Routes Middleware
