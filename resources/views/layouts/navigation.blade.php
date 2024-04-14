@@ -9,7 +9,7 @@
 
                 <!-- logo -->
                 <div class="logo">
-                    <a href="index.html">
+                    <a href="{{ route('dashboard') }}">
                         {{ auth()->user()->name }}<br>
                         {{ auth()->user()->email }}
                     </a>
@@ -50,25 +50,25 @@
                     </a>
                 </li>
                 <li>
-                    <a href="layout-api.html">
+                    <a href="{{ route('patient.index') }}">
                         <i class="entypo-users"></i>
                         <span class="title">Patients</span>
                     </a>
                 </li>
                 <li>
-                    <a href="layout-api.html">
+                    <a href="#">
                         <i class="entypo-doc-text-inv"></i>
                         <span class="title">Reports</span>
                     </a>
                 </li>
                 <li>
-                    <a href="layout-api.html">
+                    <a href="#">
                         <i class="entypo-box"></i>
                         <span class="title">Vaccines</span>
                     </a>
                 </li>
                 <li>
-                    <a href="layout-api.html">
+                    <a href="#">
                         <i class="entypo-heart"></i>
                         <span class="title">Family Planning</span>
                     </a>
@@ -103,7 +103,7 @@
 
             <!-- Profile Info and Notifications -->
             <div class="col-md-6 col-sm-8 clearfix">
-                <h2>Dashboard</h2>
+
                 {{-- <ul class="user-info pull-left pull-none-xsm">
 
                     <!-- Profile Info -->
@@ -154,14 +154,14 @@
 
                 </ul> --}}
 
-                {{-- <ul class="user-info pull-left pull-right-xs pull-none-xsm">
+                <ul class="user-info pull-left pull-right-xs pull-none-xsm">
 
                     <!-- Raw Notifications -->
                     <li class="notifications dropdown">
 
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                             data-close-others="true">
-                            <i class="entypo-attention"></i>
+                            <i class="entypo-megaphone"></i>
                             <span class="badge badge-info">6</span>
                         </a>
 
@@ -269,7 +269,7 @@
                     </li>
 
                     <!-- Message Notifications -->
-                    <li class="notifications dropdown">
+                    {{-- <li class="notifications dropdown">
 
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                             data-close-others="true">
@@ -370,10 +370,10 @@
                             </li>
                         </ul>
 
-                    </li>
+                    </li> --}}
 
                     <!-- Task Notifications -->
-                    <li class="notifications dropdown">
+                    {{-- <li class="notifications dropdown">
 
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                             data-close-others="true">
@@ -480,9 +480,9 @@
                             </li>
                         </ul>
 
-                    </li>
+                    </li> --}}
 
-                </ul> --}}
+                </ul>
 
             </div>
 

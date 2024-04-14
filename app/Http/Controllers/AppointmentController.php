@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Traits\SendNotificationTrait;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class AppointmentController extends Controller
 {
@@ -102,23 +103,24 @@ class AppointmentController extends Controller
 
         try {
 
+            $name = $appointment->firstname . ' ' . $appointment->lastname;
+            $email = $this->getUniqueEmail($appointment);
+            $randomPassword = Str::random(6);
+
+            $message = "Your appointment has been approved. You may log in using the provided credentials to track your records.
+             \n Username: $email Password: $randomPassword";
+
             if ($appointment->status === 'pending') {
+              
+                $this->createUser($name, $email, $randomPassword);
+                $this->sendMessageNotification($appointment->phone, $message);
 
-                $name = $appointment->firstname . ' ' . $appointment->lastname;
-                $email = rand(999, 999999);
-                $password = rand(999999,9999999);
-
-                $this->createUser($name,$email, $password);
-
-                $this->sendMessageNotification($appointment->phone, "Email: $email Password: $password");
-            }
-
-            $appointment->status = 'accepted';
+                $appointment->status = 'approved';
     
-            if ($appointment->save()) {
-
-                return redirect()->back()->with('success', 'Appointment accepted!');
-
+                if ($appointment->save()) {
+    
+                    return redirect()->back()->with('success', 'Appointment accepted!');
+                }
             }
 
         } catch (\Exception $e) {
@@ -136,12 +138,35 @@ class AppointmentController extends Controller
      */
     public function createUser($name, $email, $password) {
 
-        User::create([
+        $user = [
             'name'     => $name,
             'email'    => $email,
             'role'     => 2,
             'password' => Hash::make($password),
-        ]);
+        ];
+
+        User::create($user);
+    }
+
+    /**
+     * Get combination email function
+     *
+     * @param array $appointment
+     * @return string $uniqueEmail
+     */
+    public function getUniqueEmail($appointment) {
+        
+        $fname = substr($appointment->firstname, 0, 1);
+        $mname = substr($appointment->middlename, 0, 1);
+        $lname = substr($appointment->lastname, 0, 1);
+        $birthdate = explode('-', $appointment->birthdate);
+        $day = $birthdate[1];
+        $month = $birthdate[2];
+        $year = substr($birthdate[0], -2);
+
+        $uniqueEmail = $fname . $mname . $lname . $day . $month . $year;
+
+        return strtoupper($uniqueEmail);
     }
 
     /**

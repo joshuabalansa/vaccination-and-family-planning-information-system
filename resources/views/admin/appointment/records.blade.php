@@ -1,29 +1,6 @@
 <x-app-layout>
-
-    <h2>Appointments</h2>
-
-    <br />
-
-    <script type="text/javascript">
-        jQuery(document).ready(function($) {
-            var $table1 = jQuery('#table-1');
-
-            $table1.DataTable({
-                "aLengthMenu": [
-                    [10, 25, 50, -1],
-                    [10, 25, 50, "All"]
-                ],
-                "bStateSave": true
-            });
-
-
-            $table1.closest('.dataTables_wrapper').find('select').select2({
-                minimumResultsForSearch: -1
-            });
-        });
-    </script>
-
-    <table class="table table-bordered datatable" id="table-1">
+    <h2>Appointments</h2><br />
+    <table class="table table-bordered datatable" id="datatable">
         <thead>
             <tr>
                 <th>Name</th>
@@ -46,8 +23,24 @@
                             {{ $appointment->getStatus() }}
                         </span>
                     </td>
-                    <td class="center">
-                        <a href="{{ route('appointment.accept', $appointment->id) }}">Approve</a>
+                    <td>
+                        @if ($appointment->getStatus() !== 'Accepted')
+                            <a href="{{ route('appointment.accept', $appointment->id) }}"
+                                class="btn btn-default btn-sm btn-icon icon-left">
+                                <i class="entypo-check"></i>
+                                Approve
+                            </a>
+                        @endif
+
+                        <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
+                            <i class="entypo-cancel"></i>
+                            Cancel
+                        </a>
+
+                        <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
+                            <i class="entypo-info"></i>
+                            Info
+                        </a>
                     </td>
                 </tr>
             @endforeach
@@ -63,14 +56,4 @@
             </tr>
         </tfoot>
     </table>
-    </div>
-
-    <link rel="stylesheet" href="{{ asset('assets/js/datatables/datatables.css') }}"">
-    <link rel="stylesheet" href="{{ asset('assets/js/select2/select2-bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/js/select2/select2.css') }}">
-
-    <script src="{{ asset('assets/js/datatables/datatables.js') }}"></script>
-    <script src="{{ asset('assets/js/select2/select2.min.js') }}"></script>
-    <script src="{{ asset('assets/js/neon-chat.js') }}"></script>
-
 </x-app-layout>

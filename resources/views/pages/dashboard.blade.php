@@ -11,7 +11,6 @@
                 <h3>Pending Appointments</h3>
                 <p>Showing all pending applicants</p>
             </div>
-
         </div>
 
         <div class="col-sm-3 col-xs-6">
@@ -19,7 +18,7 @@
             <div class="tile-stats tile-green">
                 <div class="icon"><i class="entypo-chart-bar"></i></div>
                 <div class="num" data-start="0"
-                    data-end="{{ \App\Models\Appointment::where(['status' => 'accepted'])->count() }}" data-postfix=""
+                    data-end="{{ \App\Models\Appointment::where(['status' => 'approved'])->count() }}" data-postfix=""
                     data-duration="1500" data-delay="600">
                     0
                 </div>

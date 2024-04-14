@@ -34,6 +34,24 @@
 
     @include('layouts.navigation')
     <hr>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            var $table1 = jQuery('#datatable');
+
+            $table1.DataTable({
+                "aLengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ],
+                "bStateSave": true
+            });
+
+
+            $table1.closest('.dataTables_wrapper').find('select').select2({
+                minimumResultsForSearch: -1
+            });
+        });
+    </script>
     {{ $slot }}
     </div>
     <!-- Imported styles on this page -->
@@ -60,6 +78,15 @@
     <script src="{{ asset('assets/js/neon-custom.js') }}"></script>
     <!-- Demo Settings -->
     <script src="{{ asset('assets/js/neon-demo.js') }}"></script>
+
+    {{-- Datatables --}}
+    <link rel="stylesheet" href="{{ asset('assets/js/datatables/datatables.css') }}"">
+    <link rel="stylesheet" href="{{ asset('assets/js/select2/select2-bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/js/select2/select2.css') }}">
+
+    <script src="{{ asset('assets/js/datatables/datatables.js') }}"></script>
+    <script src="{{ asset('assets/js/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/js/neon-chat.js') }}"></script>
 
 </body>
 

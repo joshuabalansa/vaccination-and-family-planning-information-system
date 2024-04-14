@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Appointment;
 
 class PatientController extends Controller
 {
@@ -11,8 +12,9 @@ class PatientController extends Controller
      */
     public function index()
     {
-        
-        return view('admin.patient.index');
+        $appointments = Appointment::where(['status' => 'approved'])->get();
+
+        return view('admin.patient.index', compact('appointments'));
     }
 
     /**
