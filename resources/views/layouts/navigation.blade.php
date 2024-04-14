@@ -1,4 +1,4 @@
-<div class="page-container">
+<div class="page-container" style="position: fixed">
     <!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
 
     <div class="sidebar-menu">
@@ -80,12 +80,13 @@
                     </a>
                     <ul>
                         <li>
-                            <a href="ui-panels.html">
+                            <a href="{{ route('profile.edit') }}">
                                 <span class="title">Change Password</span>
                             </a>
                         </li>
                         <li>
-                            <a href="ui-panels.html">
+                            <a href="#"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <span class="title">Sign out</span>
                             </a>
                         </li>
@@ -554,7 +555,7 @@
                             Log Out <i class="entypo-logout right"></i>
                         </a> --}}
 
-                        <form method="POST" action="{{ route('logout') }}">
+                        <form method="POST" id="logout-form" action="{{ route('logout') }}">
                     <li>
                         @csrf
                         <button class="btn btn-secondary" type="submit">

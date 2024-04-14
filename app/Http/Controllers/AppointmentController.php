@@ -121,6 +121,8 @@ class AppointmentController extends Controller
     
                     return redirect()->back()->with('success', 'Appointment accepted!');
                 }
+            } else {
+                return redirect()->back();
             }
 
         } catch (\Exception $e) {
