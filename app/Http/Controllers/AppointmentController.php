@@ -230,7 +230,7 @@ class AppointmentController extends Controller
 
         try {
 
-            dd($appointment);
+            return view('admin.appointment.info', compact('appointment'));
 
         } catch (\Exception $e) {
 

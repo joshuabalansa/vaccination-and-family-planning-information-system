@@ -24,7 +24,7 @@
                         </span>
                     </td>
                     <td>
-                        @if ($appointment->getStatus() !== 'Accepted')
+                        @if ($appointment->getStatus() !== 'Approved')
                             <a href="{{ route('appointment.accept', $appointment->id) }}"
                                 class="btn btn-default btn-sm btn-icon icon-left">
                                 <i class="entypo-check"></i>
@@ -37,7 +37,8 @@
                             Cancel
                         </a>
 
-                        <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
+                        <a href="{{ route('appointment.info', $appointment->id) }}"
+                            class="btn btn-info btn-sm btn-icon icon-left">
                             <i class="entypo-info"></i>
                             Info
                         </a>
