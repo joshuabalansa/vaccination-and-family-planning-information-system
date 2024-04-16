@@ -11,31 +11,31 @@ class Appointment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'firstname',
-        'middlename',
-        'lastname',
-        'birthdate',
-        'time',
-        'bw',
-        'bl',
-        'city',
-        'brgy',
-        'phone',
-        'g',
-        'p',
-        'a',
-        'lb',
-        'd',
+        'first_name',
+        'middle_name',
+        'last_name',
+        'birth_date',
+        'body_weight',
+        'body_length',
+        'address',
+        'gravida',
+        'para',
+        'abortion',
+        'live_birth',
+        'death',
         'philhealth',
         '4ps_number',
-        'm_name',
-        'm_birthdate',
-        'm_age',
-        'm_occupation',
-        'f_name',
-        'f_birthdate',
-        'f_age',
-        'f_occupation',
+        'mother_maiden_name',
+        'mother_birth_date',
+        'mother_age',
+        'mother_occupation',
+        'father_name',
+        'father_birth_date',
+        'father_age',
+        'father_occupation',
+        'phone_number',
+        'appointment_time',
+        'appointment_date',
     ];
     /**
      * get name function
@@ -44,7 +44,7 @@ class Appointment extends Model
      */
     public function getName() {
 
-      return  ucfirst($this->firstname) . ' ' . ucfirst($this->lastname);
+      return  ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
     }
 
     /**
@@ -64,7 +64,7 @@ class Appointment extends Model
      */
     public function getPhone() {
 
-        return  $this->phone;
+        return  $this->phone_number;
     }
 
     /**
@@ -74,17 +74,7 @@ class Appointment extends Model
      */
     public function getAddresses() {
 
-        return  $this->street . ' ' . $this->brgy . ' ' . $this->city;
-    }
-
-     /**
-     * get alllergic_reaction function
-     *
-     * @return string
-     */
-    public function getAllergicReaction() {
-
-        return  $this->allergic_reaction;
+        return  $this->address;
     }
 
 
@@ -102,17 +92,6 @@ class Appointment extends Model
     }
 
     /**
-     * get vaccine_type function
-     *
-     * @return string
-     */
-    public function getVaccineType() {
-
-        return  $this->vaccine_type;
-    }
-
-
-    /**
      * get vaccine_center function
      *
      * @return string
@@ -121,7 +100,6 @@ class Appointment extends Model
 
         return  $this->vaccine_center;
     }
-
 
     /**
      * get appointment status

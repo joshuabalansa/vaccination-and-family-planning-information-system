@@ -21,7 +21,35 @@ class AppointmentController extends Controller
      */
     public function appointmentPage()
     {
-        return view('pages.appointment-page');
+        $fields = [
+            'first_name' => 'First Name',
+            'middle_name' => 'Middle Name',
+            'last_name' => 'Last Name',
+            'birth_date' => 'Birth Date',
+            'body_weight' => 'Body Weight',
+            'body_length' => 'Body Length',
+            'address' => 'Address',
+            'gravida' => 'Gravida',
+            'para' => 'Para',
+            'abortion' => 'Abortion',
+            'live_birth' => 'Live Birth',
+            'death' => 'Death',
+            'philhealth' => 'Philhealth',
+            '4ps_number' => '4Ps Number',
+            'mother_maiden_name' => 'Mother Maiden Name',
+            'mother_birth_date' => 'Mother Birth Date',
+            'mother_age' => 'Mother Age',
+            'mother_occupation' => 'Mother Occupation',
+            'father_name' => 'Father Name',
+            'father_birth_date' => 'Father Birth Date',
+            'father_age' => 'Father Age',
+            'father_occupation' => 'Father Occupation',
+            'phone_number' => 'Phone Number',
+            'appointment_time' => 'Appointment Time',
+            'appointment_date' => 'Appointment Date',
+        ];
+
+        return view('pages.appointment-page', compact('fields'));
     }
 
     /**
@@ -35,6 +63,8 @@ class AppointmentController extends Controller
         try {
 
             $validatedData = $request->validated();
+
+            // dd($validatedData);
 
             $createAppointment = Appointment::create($validatedData);
 
@@ -86,7 +116,7 @@ class AppointmentController extends Controller
 
         try {
 
-            $name = $appointment->firstname . ' ' . $appointment->lastname;
+            $name = $appointment->first_name . ' ' . $appointment->last_name;
             $email = $this->getUniqueEmail($appointment);
             $randomPassword = Str::random(6);
 
@@ -98,7 +128,7 @@ class AppointmentController extends Controller
 
                  $user->createUser($name, $email, 2, $randomPassword);
 
-                $this->sendMessageNotification($appointment->phone, $message);
+                $this->sendMessageNotification($appointment->phone_number, $message);
 
                 $appointment->status = 'approved';
 
@@ -122,17 +152,17 @@ class AppointmentController extends Controller
      */
     public function getUniqueEmail($appointment) {
 
-        $fname = substr($appointment->firstname, 0, 1);
-        $mname = substr($appointment->middlename, 0, 1);
-        $lname = substr($appointment->lastname, 0, 1);
-        $birthdate = explode('-', $appointment->birthdate);
+        $fname = substr($appointment->first_name, 0, 1);
+        $mname = substr($appointment->middle_name, 0, 1);
+        $lname = $appointment->last_name;
+        $birthdate = explode('-', $appointment->birth_date);
         $day = $birthdate[1];
         $month = $birthdate[2];
         $year = substr($birthdate[0], -2);
 
         $uniqueEmail = $fname . $mname . $lname . $day . $month . $year;
 
-        return strtoupper($uniqueEmail);
+        return $uniqueEmail;
     }
 
     /**

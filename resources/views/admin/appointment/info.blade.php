@@ -1,73 +1,23 @@
 <x-app-layout>
     <h2>Appointment Information</h2><br />
+
     <table class="table table-hover">
         <tbody>
-            <tr>
-                <th scope="col">name</th>
-            </tr>
-            <tr>
-                <th scope="col">Birth Date</th>
-            </tr>
-            <tr>
-                <th scope="col">Body Weight</th>
-            </tr>
-            <tr>
-                <th scope="col">Time</th>
-            </tr>
-            <tr>
-                <th scope="col">BL</th>
-            </tr>
-            <tr>
-                <th scope="col">Address</th>
-            </tr>
-            <tr>
-                <th scope="col">Phone #</th>
-            </tr>
-            <tr>
-                <th scope="col">G</th>
-            </tr>
-            <tr>
-                <th scope="col">P</th>
-            </tr>
-            <tr>
-                <th scope="col">A</th>
-            </tr>
-            <tr>
-                <th scope="col">LB</th>
-            </tr>
-            <tr>
-                <th scope="col">D</th>
-            </tr>
-            <tr>
-                <th scope="col">Philhealth</th>
-            </tr>
-            <tr>
-                <th scope="col">4PS</th>
-            </tr>
-            <tr>
-                <th scope="col">Mother's Maiden Name</th>
-            </tr>
-            <tr>
-                <th scope="col">Mother's Birth Date</th>
-            </tr>
-            <tr>
-                <th scope="col">Mother's Age</th>
-            </tr>
-            <tr>
-                <th scope="col">Mother's Occupation</th>
-            </tr>
-            <tr>
-                <th scope="col">Father's Maiden Name</th>
-            </tr>
-            <tr>
-                <th scope="col">Father's Birth Date</th>
-            </tr>
-            <tr>
-                <th scope="col">Father's Age</th>
-            </tr>
-            <tr>
-                <th scope="col">Father's Occupation</th>
-            </tr>
+            @foreach ($appointment->toArray() as $field => $value)
+                @if ($field !== 'id' && $field !== 'updated_at')
+                    <tr>
+                        <th scope="col">{{ ucfirst(str_replace('_', ' ', $field)) }}:</th>
+                        @if ($field === 'status')
+                            <td>
+                                <span class="badge rounded-pill text-bg-danger">{{ ucfirst($value) }}</span>
+                            </td>
+                        @else
+                            <td>{{ ucfirst($value) }}</td>
+                        @endif
+
+                    </tr>
+                @endif
+            @endforeach
         </tbody>
     </table>
 
