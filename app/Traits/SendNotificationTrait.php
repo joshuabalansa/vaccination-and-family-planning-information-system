@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-trait SendNotificationTrait 
+trait SendNotificationTrait
 {
 
     /**
@@ -32,7 +32,7 @@ trait SendNotificationTrait
         // Receive response from server
         curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 
-        $output = curl_exec( $ch );
+        curl_exec( $ch );
 
         curl_close ($ch);
 

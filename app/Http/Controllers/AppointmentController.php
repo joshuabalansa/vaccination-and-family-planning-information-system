@@ -7,7 +7,7 @@ use App\Http\Requests\AppointmentRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Traits\SendNotificationTrait;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
 
 class AppointmentController extends Controller
@@ -59,24 +59,7 @@ class AppointmentController extends Controller
 
         $this->authorize('viewAppointments', Appointment::class);
 
-        if ($request->has('search')) {
-
-            $search = $request->input('search');
-
-            $appointments = Appointment::query();
-        
-            if ($search) {
-                $appointments->where('firstname', 'like', '%' . $search . '%')
-                             ->orWhere('lastname', 'like', '%' . $search . '%')
-                             ->orWhere('status', 'like', '%' . $search . '%');
-            }
-        
-            $appointments = $appointments->paginate(10);
-
-        } else {
-
-            $appointments = Appointment::paginate(10);
-        }
+        $appointments = Appointment::where(['status' => 'pending'])->get();
 
         return view('admin.appointment.records', compact('appointments'));
     }
@@ -107,22 +90,22 @@ class AppointmentController extends Controller
             $email = $this->getUniqueEmail($appointment);
             $randomPassword = Str::random(6);
 
-            $message = "Your appointment has been approved. You may log in using the provided credentials to track your records.
-             \n Username: $email Password: $randomPassword";
+            $message = Config::get('messages.appointment_approved') . "\n \n Username: $email \n Password: $randomPassword";
 
             if ($appointment->status === 'pending') {
-              
-                $this->createUser($name, $email, $randomPassword);
+
+                 $user = new User;
+
+                 $user->createUser($name, $email, 2, $randomPassword);
+
                 $this->sendMessageNotification($appointment->phone, $message);
 
                 $appointment->status = 'approved';
-    
+
                 if ($appointment->save()) {
-    
+
                     return redirect()->back()->with('success', 'Appointment accepted!');
                 }
-            } else {
-                return redirect()->back();
             }
 
         } catch (\Exception $e) {
@@ -132,32 +115,13 @@ class AppointmentController extends Controller
     }
 
     /**
-     * create user function
-     *
-     * @param string $name
-     * @param string $password
-     * @return void
-     */
-    public function createUser($name, $email, $password) {
-
-        $user = [
-            'name'     => $name,
-            'email'    => $email,
-            'role'     => 2,
-            'password' => Hash::make($password),
-        ];
-
-        User::create($user);
-    }
-
-    /**
      * Get combination email function
      *
-     * @param array $appointment
+     * @param object $appointment
      * @return string $uniqueEmail
      */
     public function getUniqueEmail($appointment) {
-        
+
         $fname = substr($appointment->firstname, 0, 1);
         $mname = substr($appointment->middlename, 0, 1);
         $lname = substr($appointment->lastname, 0, 1);
