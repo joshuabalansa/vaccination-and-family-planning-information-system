@@ -116,7 +116,7 @@ class AppointmentController extends Controller
             return redirect()->back()->with('error', 'Appointment status is not pending.');
         }
 
-        $name = $this->getFullName($appointment);
+        $name = $this->getName($appointment);
         $email = $this->getUniqueEmail($appointment);
         $randomPassword = Str::random(6);
         $message = Config::get('messages.appointment_approved') . "\n \n Username: $email \n Password: $randomPassword";
