@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Traits;
-
+use GuzzleHttp\Client;
 trait SendNotificationTrait
 {
 
@@ -12,29 +12,27 @@ trait SendNotificationTrait
      * @param string $message
      * @return void
      */
-    public function sendMessageNotification($recepient, $message) {
+    public function sendMessageNotification($apikey, $number, $message, $sender) {
 
-        $ch = curl_init();
+        $client = new Client();
 
         $parameters = [
-            'apikey'      => env('SMS_API_KEY'),
-            'number'      => $recepient,
-            'message'     => $message,
-            'sendername'  => env('SMS_SENDER_NAME', 'SEMAPHORE')
+            'form_params'    => [
+                'apikey'     => $apikey,
+                'number'     => $number,
+                'message'    => $message,
+                'sendername' => $sender
+            ]
         ];
 
-        curl_setopt( $ch, CURLOPT_URL,'https://semaphore.co/api/v4/messages' );
-        curl_setopt( $ch, CURLOPT_POST, 1 );
+        try {
 
-        //Send the parameters set above with the request
-        curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query( $parameters ) );
+           $client->post(env('SMS_API_URL'), $parameters);
 
-        // Receive response from server
-        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+        } catch (\GuzzleHttp\Exception\RequestException $e) {
 
-        curl_exec( $ch );
-
-        curl_close ($ch);
+            \Log::error($e->getMessage());
+        }
 
     }
 }

@@ -14,7 +14,7 @@
                         @foreach ($fields as $field => $label)
                             <div class="form-group row">
                                 <label for="{{ $field }}"
-                                    class="col-md-4 col-form-label text-md-right">{{ __($label) }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __($label) }}:</label>
 
                                 <div class="col-md-6 mb-3">
                                     <input id="{{ $field }}"
@@ -34,7 +34,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-dark">
                                     {{ __('Register an Appointment') }}
                                 </button>
                             </div>

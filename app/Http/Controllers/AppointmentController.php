@@ -64,8 +64,6 @@ class AppointmentController extends Controller
 
             $validatedData = $request->validated();
 
-            // dd($validatedData);
-
             $createAppointment = Appointment::create($validatedData);
 
             if ($createAppointment) {
@@ -104,7 +102,6 @@ class AppointmentController extends Controller
         return view('pages.success-page');
     }
 
-
     /**
      * Update an appointment to "accepted"
      *
@@ -114,29 +111,26 @@ class AppointmentController extends Controller
     public function accept(Appointment $appointment)
     {
 
+        if ($appointment->status !== 'pending') {
+
+            return redirect()->back()->with('error', 'Appointment status is not pending.');
+        }
+
+        $name = $this->getFullName($appointment);
+        $email = $this->getUniqueEmail($appointment);
+        $randomPassword = Str::random(6);
+        $message = Config::get('messages.appointment_approved') . "\n \n Username: $email \n Password: $randomPassword";
+
         try {
 
-            $name = $appointment->first_name . ' ' . $appointment->last_name;
-            $email = $this->getUniqueEmail($appointment);
-            $randomPassword = Str::random(6);
+            $this->createUserAndSendNotification($name, $email, $randomPassword, $appointment->phone_number, $message);
 
-            $message = Config::get('messages.appointment_approved') . "\n \n Username: $email \n Password: $randomPassword";
+            $appointment->status = 'approved';
 
-            if ($appointment->status === 'pending') {
+            $appointment->save();
 
-                 $user = new User;
+            return redirect()->back()->with('success', 'Appointment accepted!');
 
-                 $user->createUser($name, $email, 2, $randomPassword);
-
-                $this->sendMessageNotification($appointment->phone_number, $message);
-
-                $appointment->status = 'approved';
-
-                if ($appointment->save()) {
-
-                    return redirect()->back()->with('success', 'Appointment accepted!');
-                }
-            }
 
         } catch (\Exception $e) {
 
@@ -145,24 +139,47 @@ class AppointmentController extends Controller
     }
 
     /**
-     * Get combination email function
+     * @param object $appointment
+     * @return string
+     */
+    private function getName($appointment) {
+
+       return $appointment->first_name . ' ' . $appointment->last_name;
+    }
+
+    /**
+     * create user and send sms notification
+     *
+     * @param string $name
+     * @param string $email
+     * @param string $password
+     * @param string $phoneNumber
+     * @param string $message
+     * @return void
+     */
+    private function createUserAndSendNotification($name, $email, $password, $phoneNumber, $message) {
+
+        $user = new User;
+        $user->createUser($name, $email, 2, $password);
+        $this->sendMessageNotification(env('SMS_API_KEY'), $phoneNumber, $message, env('SMS_SENDER_NAME'));
+    }
+
+    /**
+     * Get combination email
      *
      * @param object $appointment
      * @return string $uniqueEmail
      */
-    public function getUniqueEmail($appointment) {
+    private function getUniqueEmail($appointment) {
 
-        $fname = substr($appointment->first_name, 0, 1);
-        $mname = substr($appointment->middle_name, 0, 1);
-        $lname = $appointment->last_name;
-        $birthdate = explode('-', $appointment->birth_date);
-        $day = $birthdate[1];
-        $month = $birthdate[2];
-        $year = substr($birthdate[0], -2);
+        $fname      =   substr($appointment->first_name, 0, 1);
+        $mname      =   substr($appointment->middle_name, 0, 1);
+        $lname      =   $appointment->last_name;
+        $birthdate  =   explode('-', $appointment->birth_date);
 
-        $uniqueEmail = $fname . $mname . $lname . $day . $month . $year;
+        [$day, $month, $year] = [$birthdate[1], $birthdate[2], substr($birthdate[0], -2)];
 
-        return $uniqueEmail;
+        return $fname . $mname . $lname . $day . $month . $year;
     }
 
     /**
