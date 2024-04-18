@@ -1,9 +1,9 @@
 <x-app-layout>
-    <h2>Appointment Information</h2><br />
+    <h2>Patient Information</h2><br />
 
     <table class="table table-hover">
         <tbody>
-            @foreach ($appointment->toArray() as $field => $value)
+            @foreach ($patient->toArray() as $field => $value)
                 @if ($field !== 'id' && $field !== 'updated_at')
                     <tr>
                         <th scope="col">{{ ucfirst(str_replace('_', ' ', $field)) }}:</th>
@@ -25,9 +25,8 @@
         <a href="{{ route('appointment.records') }}" class="btn btn-primary">
             Back
         </a>
-        @if ($appointment->getStatus() !== 'Approved')
-            <a href="{{ route('appointment.accept', $appointment->id) }}"
-                class="btn btn-success btn-sm btn-icon icon-left">
+        @if ($patient->getStatus() !== 'Approved')
+            <a href="{{ route('appointment.accept', $patient->id) }}" class="btn btn-success btn-sm btn-icon icon-left">
                 <i class="entypo-check"></i>
                 Approve
             </a>

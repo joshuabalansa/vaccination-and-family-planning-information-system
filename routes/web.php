@@ -40,10 +40,10 @@ Route::prefix('appointment')->group(function () {
     Route::get('records',  [AppointmentController::class, 'appointmentRecords'])->name('appointment.records');
     Route::post('register', [AppointmentController::class, 'register'])->name('appointment.register');
     Route::get('success',  [AppointmentController::class, 'successfulPage'])->name('appointment.success');
-    Route::get('accept/{appointment}',  [AppointmentController::class, 'accept'])->name('appointment.accept');
+    Route::get('accept/{patient}',  [AppointmentController::class, 'accept'])->name('appointment.accept');
     Route::get('cancel/{appointment}',  [AppointmentController::class, 'cancel'])->name('appointment.cancel');
     Route::get('remove/{appointment}',  [AppointmentController::class, 'remove'])->name('appointment.remove');
-    Route::get('show/{appointment}',  [AppointmentController::class, 'show'])->name('appointment.info');
+    Route::get('show/{patient}',  [AppointmentController::class, 'show'])->name('appointment.info');
 });
 
 Route::prefix('patient')->group(function () {

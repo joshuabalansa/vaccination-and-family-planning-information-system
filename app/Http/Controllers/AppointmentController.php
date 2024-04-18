@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Traits\SendNotificationTrait;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
+use App\Models\Patient;
 
 class AppointmentController extends Controller
 {
@@ -64,9 +65,11 @@ class AppointmentController extends Controller
 
             $validatedData = $request->validated();
 
-            $createAppointment = Appointment::create($validatedData);
+            $createPatient = Patient::create($validatedData);
 
-            if ($createAppointment) {
+            Appointment::create(['patient_id' => $createPatient->id]);
+
+            if ($createPatient) {
 
                 return redirect()->route('appointment.success');
             }
@@ -87,9 +90,9 @@ class AppointmentController extends Controller
 
         $this->authorize('viewAppointments', Appointment::class);
 
-        $appointments = Appointment::where(['status' => 'pending'])->get();
+        $patients = Patient::where(['status' => 'pending'])->get();
 
-        return view('admin.appointment.records', compact('appointments'));
+        return view('admin.appointment.records', compact('patients'));
     }
 
     /**
@@ -108,26 +111,26 @@ class AppointmentController extends Controller
      * @param \App\Models\Appointment $appointment
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function accept(Appointment $appointment)
+    public function accept(Patient $patient)
     {
 
-        if ($appointment->status !== 'pending') {
+        if ($patient->status !== 'pending') {
 
             return redirect()->back()->with('error', 'Appointment status is not pending.');
         }
 
-        $name = $this->getName($appointment);
-        $email = $this->getUniqueEmail($appointment);
+        $name = $this->getName($patient);
+        $email = $this->getUniqueEmail($patient);
         $randomPassword = Str::random(6);
         $message = Config::get('messages.appointment_approved') . "\n \n Username: $email \n Password: $randomPassword";
 
         try {
 
-            $this->createUserAndSendNotification($name, $email, $randomPassword, $appointment->phone_number, $message);
+            $this->createUserAndSendNotification($name, $email, $randomPassword, $patient->phone_number, $message);
 
-            $appointment->status = 'approved';
+            $patient->status = 'approved';
 
-            $appointment->save();
+            $patient->save();
 
             return redirect()->back()->with('success', 'Appointment accepted!');
 
@@ -142,9 +145,9 @@ class AppointmentController extends Controller
      * @param object $appointment
      * @return string
      */
-    private function getName($appointment) {
+    private function getName($patient) {
 
-       return $appointment->first_name . ' ' . $appointment->last_name;
+       return $patient->first_name . ' ' . $patient->last_name;
     }
 
     /**
@@ -170,12 +173,12 @@ class AppointmentController extends Controller
      * @param object $appointment
      * @return string $uniqueEmail
      */
-    private function getUniqueEmail($appointment) {
+    private function getUniqueEmail($patient) {
 
-        $fname      =   substr($appointment->first_name, 0, 1);
-        $mname      =   substr($appointment->middle_name, 0, 1);
-        $lname      =   $appointment->last_name;
-        $birthdate  =   explode('-', $appointment->birth_date);
+        $fname      =   substr($patient->first_name, 0, 1);
+        $mname      =   substr($patient->middle_name, 0, 1);
+        $lname      =   $patient->last_name;
+        $birthdate  =   explode('-', $patient->birth_date);
 
         [$day, $month, $year] = [$birthdate[1], $birthdate[2], substr($birthdate[0], -2)];
 
@@ -236,12 +239,12 @@ class AppointmentController extends Controller
      * @param \App\Models\Appointment $appointment
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function show(Appointment $appointment)
+    public function show(Patient $patient)
     {
 
         try {
 
-            return view('admin.appointment.info', compact('appointment'));
+            return view('admin.appointment.info', compact('patient'));
 
         } catch (\Exception $e) {
 
