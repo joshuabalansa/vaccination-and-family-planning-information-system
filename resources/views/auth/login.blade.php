@@ -26,7 +26,7 @@
                             @enderror
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <label for="password">{{ __('Password') }}</label>
                             <input id="password" type="password" class="form-control" name="password" required
                                 autocomplete="current-password">
@@ -37,12 +37,12 @@
                             @enderror
                         </div>
 
-                        <div class="form-check mb-3">
+                        {{-- <div class="form-check mb-3">
                             <input class="form-check-input" type="checkbox" name="remember" id="remember">
                             <label class="form-check-label" for="remember">
                                 {{ __('Remember me') }}
                             </label>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-dark btn-block">{{ __('Log in') }}</button>
