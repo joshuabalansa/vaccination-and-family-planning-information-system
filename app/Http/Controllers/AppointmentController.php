@@ -35,7 +35,7 @@ class AppointmentController extends Controller
             'abortion' => 'Abortion',
             'live_birth' => 'Live Birth',
             'death' => 'Death',
-            'philhealth' => 'Philhealth',
+            'philhealth' => 'Philhealth Number',
             '4ps_number' => '4Ps Number',
             'mother_maiden_name' => 'Mother Maiden Name',
             'mother_birth_date' => 'Mother Birth Date',
@@ -73,8 +73,7 @@ class AppointmentController extends Controller
 
                 return redirect()->route('appointment.success');
             }
-
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
 
             return redirect()->back()->with('error', 'Oops! Something went wrong. ' . $e->getMessage());
         }
@@ -88,7 +87,7 @@ class AppointmentController extends Controller
     public function appointmentRecords(Request $request)
     {
 
-        $this->authorize('viewAppointments', Appointment::class);
+        $this->authorize('viewAppointments', \App\Models\Patient::class);
 
         $patients = Patient::where(['status' => 'pending'])->get();
 
@@ -133,8 +132,6 @@ class AppointmentController extends Controller
             $patient->save();
 
             return redirect()->back()->with('success', 'Appointment accepted!');
-
-
         } catch (\Exception $e) {
 
             return redirect()->back()->with('error', 'Opps! Something went wrong. ' . $e->getMessage());
@@ -145,9 +142,10 @@ class AppointmentController extends Controller
      * @param object $appointment
      * @return string
      */
-    private function getName($patient) {
+    private function getName($patient)
+    {
 
-       return $patient->first_name . ' ' . $patient->last_name;
+        return $patient->first_name . ' ' . $patient->last_name;
     }
 
     /**
@@ -160,7 +158,8 @@ class AppointmentController extends Controller
      * @param string $message
      * @return void
      */
-    private function createUserAndSendNotification($name, $email, $password, $phoneNumber, $message) {
+    private function createUserAndSendNotification($name, $email, $password, $phoneNumber, $message)
+    {
 
         $user = new User;
         $user->createUser($name, $email, 2, $password);
@@ -173,7 +172,8 @@ class AppointmentController extends Controller
      * @param object $appointment
      * @return string $uniqueEmail
      */
-    private function getUniqueEmail($patient) {
+    private function getUniqueEmail($patient)
+    {
 
         $fname      =   substr($patient->first_name, 0, 1);
         $mname      =   substr($patient->middle_name, 0, 1);
@@ -202,14 +202,13 @@ class AppointmentController extends Controller
 
                 return redirect()->back()->with('success', 'Appointment has been cancelled');
             }
-
         } catch (\Exception $e) {
 
             return redirect()->back()->with('error', 'Opps! Something went wrong. ' . $e->getMessage());
         }
     }
 
-     /**
+    /**
      * remove appointment
      *
      * @param \App\Models\Appointment $appointment
@@ -226,7 +225,6 @@ class AppointmentController extends Controller
 
                 return redirect()->back()->with('success', 'Appointment has been deleted');
             }
-
         } catch (\Exception $e) {
 
             return redirect()->back()->with('error', 'Opps! Something went wrong. ' . $e->getMessage());
@@ -245,7 +243,6 @@ class AppointmentController extends Controller
         try {
 
             return view('admin.appointment.info', compact('patient'));
-
         } catch (\Exception $e) {
 
             return redirect()->back()->with('error', 'Opps! Something went wrong. ' . $e->getMessage());

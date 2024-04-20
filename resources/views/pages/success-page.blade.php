@@ -6,5 +6,7 @@
         <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
             We'll keep you updated with all the necessary information leading up to your appointment.
         </p>
+
+        <a class="btn btn-dark" href="{{ route('login') }}">Login Page</a>
     </div>
 </x-success-page>

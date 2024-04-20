@@ -9,8 +9,8 @@
         <div class="row justify-content-center">
             <img class="app-logo" src="{{ asset('assets/images/app_logo.png') }}" alt="app logo">
             <h5 class="text-center mb-4">{{ __(' Vaccination and Family Planning Information System') }}</h5>
-            <div class="col-md-6">
-                <div class="p-4 rounded">
+            <div class="col-md-6 d-flex flex-column">
+                <div class="p-4 rounded mb-5">
 
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
@@ -37,19 +37,16 @@
                             @enderror
                         </div>
 
-                        {{-- <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember">
-                            <label class="form-check-label" for="remember">
-                                {{ __('Remember me') }}
-                            </label>
-                        </div> --}}
-
                         <div class="form-group">
                             <button type="submit" class="btn btn-dark btn-block">{{ __('Log in') }}</button>
                         </div>
                     </form>
                 </div>
+
+                <a class="text-center" href="{{ route('appointment.index') }}">Make an appointment here</a>
             </div>
         </div>
+
     </div>
+
 </x-guest-layout>

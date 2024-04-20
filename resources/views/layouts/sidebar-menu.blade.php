@@ -67,14 +67,15 @@
                     </a>
                 </li>
             @endif
-            @if (auth()->user()->role === 1 || auth()->user()->role === 3)
+
+            @can('viewAppointments', \App\Models\Patient::class)
                 <li>
                     <a href="{{ route('appointment.records') }}">
                         <i class="entypo-layout"></i>
                         <span class="title">Appointments</span>
                     </a>
                 </li>
-            @endif
+            @endcan
 
             @if (auth()->user()->role === 1 || auth()->user()->role === 3)
                 <li>

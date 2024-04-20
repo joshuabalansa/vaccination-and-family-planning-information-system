@@ -6,15 +6,14 @@
             @foreach ($patient->toArray() as $field => $value)
                 @if ($field !== 'id' && $field !== 'updated_at')
                     <tr>
-                        <th scope="col">{{ ucfirst(str_replace('_', ' ', $field)) }}:</th>
+                        <th scope="col">{{ ucwords(str_replace('_', ' ', $field)) }}:</th>
                         @if ($field === 'status')
                             <td>
                                 <span class="badge rounded-pill text-bg-danger">{{ ucfirst($value) }}</span>
                             </td>
                         @else
-                            <td>{{ ucfirst($value) }}</td>
+                            <td>{{ isset($value) ? ucfirst($value) : '?' }}</td>
                         @endif
-
                     </tr>
                 @endif
             @endforeach

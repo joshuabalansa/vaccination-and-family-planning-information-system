@@ -5,7 +5,7 @@
             <div class="tile-stats tile-red">
                 <div class="icon"><i class="entypo-users"></i></div>
                 <div class="num" data-start="0"
-                    data-end="{{ \App\Models\Appointment::where(['status' => 'pending'])->count() }}" data-postfix=""
+                    data-end="{{ \App\Models\Patient::where(['status' => 'pending'])->count() }}" data-postfix=""
                     data-duration="1500" data-delay="0">0</div>
 
                 <h3>Pending Appointments</h3>
@@ -18,7 +18,7 @@
             <div class="tile-stats tile-green">
                 <div class="icon"><i class="entypo-chart-bar"></i></div>
                 <div class="num" data-start="0"
-                    data-end="{{ \App\Models\Appointment::where(['status' => 'approved'])->count() }}" data-postfix=""
+                    data-end="{{ \App\Models\Patient::where(['status' => 'approved'])->count() }}" data-postfix=""
                     data-duration="1500" data-delay="600">
                     0
                 </div>

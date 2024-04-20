@@ -28,7 +28,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
 });
 
 
@@ -53,11 +52,10 @@ Route::prefix('patient')->group(function () {
 # Patient Routes Middleware
 // Route::middleware(['auth', 'auth.patient'])->group(function() {
 //     Route::prefix('appointment')->group(function () {
-       
+
 //         Route::get('records',  [AppointmentController::class, 'appointmentRecords'])->name('appointment.records');
-       
+
 //     });
 // });
 
-require __DIR__.'/auth.php';
-
+require __DIR__ . '/auth.php';

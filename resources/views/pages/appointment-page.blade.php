@@ -1,16 +1,15 @@
 <x-appointment-layout>
     <center>
+        <img src="{{ asset('assets/images/app_logo.png') }}" alt="" width="200" height="200">
         <h2 class="p-5 mb-5 text-4xl font-extrabold dark:text-white">Vaccination and Family Planning Appointment</h2>
     </center>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card-header">{{ __('Online Registration') }}</div>
-
                 <div class="card-body">
                     <form method="POST" action="{{ route('appointment.register') }}">
                         @csrf
-
                         @foreach ($fields as $field => $label)
                             <div class="form-group row">
                                 <label for="{{ $field }}"
@@ -20,7 +19,7 @@
                                     <input id="{{ $field }}"
                                         type="{{ $field === 'appointment_date' || $field === 'birth_date' || $field === 'mother_birth_date' || $field === 'father_birth_date' ? 'date' : ($field === 'appointment_time' ? 'time' : 'text') }}"
                                         class="form-control @error($field) is-invalid @enderror"
-                                        name="{{ $field }}" value="{{ old($field) }}" required
+                                        name="{{ $field }}" value="{{ old($field) }}"
                                         placeholder="Enter {{ $label }}">
 
                                     @error($field)
