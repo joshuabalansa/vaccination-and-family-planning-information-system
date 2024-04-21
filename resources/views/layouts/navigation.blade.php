@@ -175,7 +175,7 @@
                     </li>
 
                     <!-- Message Notifications -->
-                    {{-- <li class="notifications dropdown">
+                    <li class="notifications dropdown">
 
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                             data-close-others="true">
@@ -276,7 +276,7 @@
                             </li>
                         </ul>
 
-                    </li> --}}
+                    </li>
 
                     <!-- Task Notifications -->
                     {{-- <li class="notifications dropdown">

@@ -12,6 +12,8 @@ class PatientController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewPatients', \App\Models\Patient::class);
+
         $appointments = Patient::where(['status' => 'approved'])->get();
 
         return view('admin.patient.index', compact('appointments'));
@@ -36,9 +38,9 @@ class PatientController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Patient $patient)
     {
-        //
+        return view('admin.patient.show', compact('patient'));
     }
 
     /**

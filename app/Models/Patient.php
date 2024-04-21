@@ -38,19 +38,21 @@ class Patient extends Model
         'appointment_date',
     ];
 
-    public function user() {
+    public function user()
+    {
 
         return $this->belongsTo('App\User');
     }
-    
+
     /**
      * get name function
      *
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
 
-      return  ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+        return  ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
     }
 
     /**
@@ -58,7 +60,8 @@ class Patient extends Model
      *
      * @return string
      */
-    public function getAge() {
+    public function getAge()
+    {
 
         return  $this->age;
     }
@@ -68,7 +71,8 @@ class Patient extends Model
      *
      * @return string
      */
-    public function getPhone() {
+    public function getPhone()
+    {
 
         return  $this->phone_number;
     }
@@ -78,18 +82,20 @@ class Patient extends Model
      *
      * @return string
      */
-    public function getAddresses() {
+    public function getAddresses()
+    {
 
         return  $this->address;
     }
 
 
-     /**
+    /**
      * get date and time function
      * @param string $dateTime get date or time
      * @return string
      */
-    public function getDateTime($dateTime) {
+    public function getDateTime($dateTime)
+    {
 
         $time = Carbon::parse($this->time);
         $formattedTime = $time->format("h:i:s A");
@@ -102,7 +108,8 @@ class Patient extends Model
      *
      * @return string
      */
-    public function getVaccineCenter() {
+    public function getVaccineCenter()
+    {
 
         return  $this->vaccine_center;
     }
@@ -111,10 +118,9 @@ class Patient extends Model
      * get appointment status
      * @return string
      */
-    public function getStatus() {
+    public function getStatus()
+    {
 
         return ucfirst($this->status);
     }
-
-    
 }

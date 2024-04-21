@@ -8,6 +8,9 @@
             <div class="logo">
                 <a href="{{ route('dashboard') }}">
                     {{ auth()->user()->name }}<br>
+                    @if (auth()->user()->role === 2)
+                        @
+                    @endif
                     {{ auth()->user()->email }}
                 </a>
             </div>
@@ -77,25 +80,18 @@
                 </li>
             @endcan
 
-            @if (auth()->user()->role === 1 || auth()->user()->role === 3)
+            @can('viewPatients', \App\Models\Patient::class)
                 <li>
                     <a href="{{ route('patient.index') }}">
                         <i class="entypo-users"></i>
                         <span class="title">Patients</span>
                     </a>
                 </li>
-            @endif
+            @endcan
+
             @if (auth()->user()->role === 1)
                 <li>
-                    <a href="#">
-                        <i class="entypo-doc-text-inv"></i>
-                        <span class="title">Reports</span>
-                    </a>
-                </li>
-            @endif
-            @if (auth()->user()->role === 1)
-                <li>
-                    <a href="#">
+                    <a href="{{ route('vaccine.index') }}">
                         <i class="entypo-box"></i>
                         <span class="title">Vaccines</span>
                     </a>
@@ -107,6 +103,14 @@
                     <span class="title">Family Planning</span>
                 </a>
             </li>
+            @if (auth()->user()->role === 1)
+                <li>
+                    <a href="#">
+                        <i class="entypo-doc-text-inv"></i>
+                        <span class="title">Reports</span>
+                    </a>
+                </li>
+            @endif
             <li class="has-sub">
                 <a href="ui-panels.html">
                     <i class="entypo-user"></i>

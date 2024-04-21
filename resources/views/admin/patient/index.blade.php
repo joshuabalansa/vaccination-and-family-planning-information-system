@@ -24,7 +24,8 @@
                         </span>
                     </td>
                     <td>
-                        <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
+                        <a href="{{ route('patient.show', $appointment->id) }}"
+                            class="btn btn-info btn-sm btn-icon icon-left">
                             <i class="entypo-info"></i>
                             Info
                         </a>
