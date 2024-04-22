@@ -6,9 +6,9 @@
 
             @foreach ($fields as $field => $label)
                 <div class="mb-3">
-                    <label for="{{ $field }}" class="form-label">{{ $label }}</label>
-                    <input type="text" class="form-control" value="{{ old($field) }}" id="{{ $field }}"
-                        name="{{ $field }}" placeholder="{{ 'Enter ' . $label }}">
+                    <label for="{{ $field }}" class="form-label">{{ $label[0] }}</label>
+                    <input type="{{ $label[1] }}" class="form-control" value="{{ old($field) }}" id="{{ $field }}"
+                        name="{{ $field }}" placeholder="{{ 'Enter ' . $label[0] }}">
                 </div>
                 @error($field)
                     <span class="invalid-feedback" role="alert">

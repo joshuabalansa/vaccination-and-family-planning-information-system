@@ -19,17 +19,18 @@ class VaccineController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     * @return \Illuminate\View\View;
      */
     public function create()
     {
-
+        # field = label, type
         $fields = [
-            'vaccine' => 'Vaccine Name',
-            'abbreviation' => 'Abbreviation',
-            'manufacturer' => 'Manufacturer',
-            'doses' => 'Doses',
-            'approved_ages' => 'Approved Ages',
-            'description' => 'Description'
+            'vaccine'       => ['Vaccine Name', 'text'],
+            'abbreviation'  => ['Abbreviation', 'text'],
+            'manufacturer'  => ['Manufacturer', 'text'],
+            'doses'         => ['Doses', 'number'],
+            'approved_ages' => ['Approved Ages', 'text'],
+            'description'   => ['Description', 'text']
         ];
 
         return view('admin.vaccines.create', compact('fields'));
@@ -37,17 +38,22 @@ class VaccineController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @param \App\Http\Requests\VaccineRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(VaccineRequest $request)
-    {
+    public function store(VaccineRequest $request) {
+
         try {
+
             $validatedData = $request->validated();
 
             $create = Vaccine::create($validatedData);
 
             if ($create) {
+
                 return redirect()->route('vaccine.index')->with('success', 'Vaccine Added Successfully');
             }
+
         } catch (\Exception $e) {
 
             return redirect()->back()->with('error', 'Oops! Something went wrong. ' . $e->getMessage());

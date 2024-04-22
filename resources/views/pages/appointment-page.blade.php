@@ -13,14 +13,14 @@
                         @foreach ($fields as $field => $label)
                             <div class="form-group row">
                                 <label for="{{ $field }}"
-                                    class="col-md-4 col-form-label text-md-right">{{ __($label) }}:</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __($label[0]) }}:</label>
 
                                 <div class="col-md-6 mb-3">
                                     <input id="{{ $field }}"
-                                        type="{{ $field === 'appointment_date' || $field === 'birth_date' || $field === 'mother_birth_date' || $field === 'father_birth_date' ? 'date' : ($field === 'appointment_time' ? 'time' : 'text') }}"
+                                        type="{{ $label[1] }}"
                                         class="form-control @error($field) is-invalid @enderror"
                                         name="{{ $field }}" value="{{ old($field) }}"
-                                        placeholder="Enter {{ $label }}">
+                                        placeholder="Enter {{ $label[1] }}">
 
                                     @error($field)
                                         <span class="invalid-feedback" role="alert">
