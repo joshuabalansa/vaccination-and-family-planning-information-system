@@ -106,8 +106,17 @@
             @if (auth()->user()->role === 1)
                 <li>
                     <a href="#">
-                        <i class="entypo-doc-text-inv"></i>
+                        <i class="entypo-folder"></i>
                         <span class="title">Reports</span>
+                    </a>
+                </li>
+            @endif
+
+            @if (auth()->user()->role === 1)
+                <li>
+                    <a href="{{ route('user.index') }}">
+                        <i class="entypo-doc-text-inv"></i>
+                        <span class="title">Users</span>
                     </a>
                 </li>
             @endif

@@ -13,26 +13,29 @@
                 <th>doses</th>
                 <th>Approved Ages</th>
                 <th>Description</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($vaccines as $vaccine)
                 <tr class="odd gradeX">
-                    <td>{{ $vaccine->vaccine }}</td>
-                    <td>{{ $vaccine->abbreviation }}</td>
-                    <td>{{ $vaccine->manufacturer }}</td>
-                    <td>{{ $vaccine->doses }}</td>
-                    <td>{{ $vaccine->approved_ages }}</td>
-                    <td>{{ $vaccine->description }}</td>
-                    <td>
-                        <a href="#">Archive</a>
+                    <td>{{ $vaccine->getVaccine() }}</td>
+                    <td>{{ $vaccine->getAbbreviation() }}</td>
+                    <td>{{ $vaccine->getManufacturer() }}</td>
+                    <td>{{ $vaccine->getDoses() }}</td>
+                    <td>{{ $vaccine->getApprovedAges() }}</td>
+                    <td>{{ $vaccine->getDescription() }}</td>
+                    <td><span
+                            class='badge badge-{{ $vaccine->getStatus() === 'available' ? 'success' : 'secondary' }}'>{{ ucfirst($vaccine->getStatus()) }}</span>
                     </td>
-                    {{-- <td>
-                        <span class="badge badge-{{ $appointment->getStatus() === 'Pending' ? 'danger' : 'success' }}">
-                            {{ $appointment->getStatus() }}
-                        </span>
-                    </td> --}}
+                    <td>
+                        @if ($vaccine->getStatus() === 'available')
+                            <a href="{{ route('vaccine.archive', $vaccine->id) }}">Archive</a>
+                        @else
+                            <a href="{{ route('vaccine.unarchived', $vaccine->id) }}">Unarchived</a>
+                        @endif
+                    </td>
                 </tr>
             @endforeach
         </tbody>
@@ -44,6 +47,7 @@
                 <th>doses</th>
                 <th>Approved Ages</th>
                 <th>Description</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
         </tfoot>

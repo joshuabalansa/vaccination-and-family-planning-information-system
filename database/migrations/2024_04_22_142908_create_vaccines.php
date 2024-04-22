@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('doses');
             $table->string('approved_ages');
             $table->text('description');
-            $table->string('status');
+            $table->string('status')->default('available');
             $table->timestamps();
         });
     }

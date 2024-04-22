@@ -10,17 +10,16 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('appointment.register') }}">
                         @csrf
-                        @foreach ($fields as $field => $label)
+                        @foreach ($fields as $field => [$label, $type])
                             <div class="form-group row">
                                 <label for="{{ $field }}"
-                                    class="col-md-4 col-form-label text-md-right">{{ __($label[0]) }}:</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __($label) }}:</label>
 
                                 <div class="col-md-6 mb-3">
-                                    <input id="{{ $field }}"
-                                        type="{{ $label[1] }}"
+                                    <input id="{{ $field }}" type="{{ $type }}"
                                         class="form-control @error($field) is-invalid @enderror"
                                         name="{{ $field }}" value="{{ old($field) }}"
-                                        placeholder="Enter {{ $label[1] }}">
+                                        placeholder="Enter {{ $label }}">
 
                                     @error($field)
                                         <span class="invalid-feedback" role="alert">

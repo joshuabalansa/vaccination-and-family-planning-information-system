@@ -15,6 +15,81 @@ class Vaccine extends Model
         'manufacturer',
         'doses',
         'approved_ages',
-        'description'
+        'description',
+        'status'
     ];
+
+    /**
+     * get vaccine name
+     * 
+     * @return string
+     */
+    public function getVaccine()
+    {
+
+        return ucfirst($this->vaccine);
+    }
+
+    /**
+     * get abbreviation
+     * 
+     * @return string
+     */
+    public function getAbbreviation()
+    {
+
+        return strtoupper($this->abbreviation);
+    }
+
+    /**
+     * get manufacturer
+     * 
+     * @return string
+     */
+    public function getManufacturer()
+    {
+
+        return ucfirst($this->manufacturer);
+    }
+
+    /**
+     * get doses
+     * 
+     * @return int
+     */
+    public function getDoses()
+    {
+
+        return $this->doses;
+    }
+
+    /**
+     * @return string
+     */
+    public function getApprovedAges()
+    {
+
+        return $this->approved_ages;
+    }
+
+    /**
+     * get description
+     * 
+     * @return string
+     */
+    public function getDescription()
+    {
+
+        return $this->description;
+    }
+
+    /**
+     * get status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
 }

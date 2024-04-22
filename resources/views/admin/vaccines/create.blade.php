@@ -1,14 +1,14 @@
 <x-app-layout>
     <h2 class="mb-3">Add Vaccine</h2>
-    <div class="container">
+    <div class="container" style="margin-top: 100px;">
         <form action="{{ route('vaccine.store') }}" method="POST">
             @csrf
 
-            @foreach ($fields as $field => $label)
+            @foreach ($fields as $field => [$label, $type])
                 <div class="mb-3">
-                    <label for="{{ $field }}" class="form-label">{{ $label[0] }}</label>
-                    <input type="{{ $label[1] }}" class="form-control" value="{{ old($field) }}" id="{{ $field }}"
-                        name="{{ $field }}" placeholder="{{ 'Enter ' . $label[0] }}">
+                    <label for="{{ $field }}" class="form-label">{{ $label }}</label>
+                    <input type="{{ $type }}" class="form-control" value="{{ old($field) }}"
+                        id="{{ $field }}" name="{{ $field }}" placeholder="{{ 'Enter ' . $label }}">
                 </div>
                 @error($field)
                     <span class="invalid-feedback" role="alert">

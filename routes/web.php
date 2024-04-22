@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\VaccineController;
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,6 +58,12 @@ Route::prefix('vaccine')->group(function () {
     Route::get('/', [VaccineController::class, 'index'])->name('vaccine.index');
     Route::get('create', [VaccineController::class, 'create'])->name('vaccine.create');
     Route::post('store', [VaccineController::class, 'store'])->name('vaccine.store');
+    Route::get('archive/{vaccine}', [VaccineController::class, 'archive'])->name('vaccine.archive');
+    Route::get('unarchived/{vaccine}', [VaccineController::class, 'unArchive'])->name('vaccine.unarchived');
+});
+
+Route::prefix('users')->group(function () {
+    Route::get('/', [UserController::class, 'index'])->name('user.index');
 });
 
 # Patient Routes Middleware
