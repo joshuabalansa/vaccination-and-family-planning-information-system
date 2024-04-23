@@ -128,7 +128,7 @@
                 <ul>
                     <li>
                         <a href="{{ route('profile.edit') }}">
-                            <span class="title">Change Password</span>
+                            <span class="title">Settings</span>
                         </a>
                     </li>
                     <li>
