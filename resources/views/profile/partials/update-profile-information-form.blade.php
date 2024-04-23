@@ -16,15 +16,17 @@
 
         <div class="mb-3">
             <label for="name" class="form-label">{{ __('Name') }}</label>
-            <input id="name" name="name" type="text" class="form-control" value="{{ old('name', $user->name) }}" required autofocus autocomplete="name">
+            <input id="name" name="name" type="text" class="form-control"
+                value="{{ old('name', $user->name) }}" required autofocus autocomplete="name">
             @error('name')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
 
         <div class="mb-3">
-            <label for="email" class="form-label">{{ __('Email') }}</label>
-            <input id="email" name="email" type="text" class="form-control" value="{{ old('email', $user->email) }}" required autocomplete="username">
+            <label for="email" class="form-label">{{ __('Username or Email') }}</label>
+            <input id="email" name="email" type="text" class="form-control"
+                value="{{ old('email', $user->email) }}" required autocomplete="username">
             @error('email')
                 <div class="text-danger">{{ $message }}</div>
             @enderror

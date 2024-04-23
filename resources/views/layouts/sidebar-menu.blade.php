@@ -46,7 +46,7 @@
 
             @if (auth()->user()->role === 2 || auth()->user()->role === 3)
                 <li class="active">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('schedule.index') }}">
                         <i class="entypo-calendar"></i>
                         <span class="title">Schedules</span>
                     </a>
