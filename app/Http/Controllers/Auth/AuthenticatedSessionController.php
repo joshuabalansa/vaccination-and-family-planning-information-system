@@ -30,16 +30,16 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        $role = Auth::user()->role;
+        $status = Auth::user()->status;
 
-        // if ($role == 1) {
+        if ($status === 'active') {
 
             return redirect()->intended(RouteServiceProvider::HOME);
 
-        // } elseif ($role == 2) {
+        } else {
 
-        //     return redirect('/patient');
-        // }
+            return redirect()->back()->with('error', 'The account is inactive');
+        }
     }
 
     /**
