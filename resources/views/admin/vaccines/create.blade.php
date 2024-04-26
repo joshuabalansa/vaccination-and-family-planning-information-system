@@ -17,8 +17,8 @@
                 @enderror
             @endforeach
 
-            <button type="submit" class="btn btn-primary mt-5">Save</button>
-            <a href="{{ route('vaccine.index') }}" class="btn btn-outline-secondary mt-5">Back</a>
+            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Save</button>
+            <a href="{{ route('vaccine.index') }}" class="btn btn-outline-secondary" style="margin-top: 10px;">Back</a>
         </form>
     </div>
 </x-app-layout>

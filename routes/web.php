@@ -66,6 +66,7 @@ Route::prefix('vaccine')->group(function () {
 Route::prefix('users')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('user.index');
     Route::get('deactivate/{user}', [UserController::class, 'deactivate'])->name('user.deactivate');
+    Route::get('reactivate/{user}', [UserController::class, 'reactivate'])->name('user.reactivate');
 });
 
 Route::prefix('schedule')->group(function () {

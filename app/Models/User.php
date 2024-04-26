@@ -65,8 +65,12 @@ class User extends Authenticatable
         return $this;
     }
 
-    public function patient() {
 
-        return $this->hasOne('App\Patient');
+    /**
+     * @return string
+     */
+    public function getStatus() {
+
+        return ucfirst($this->status);
     }
 }

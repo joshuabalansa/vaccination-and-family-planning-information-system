@@ -15,33 +15,46 @@ class UserController extends Controller
     }
 
     /**
+     * deactivate the user
+     *
      * @param object $user
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function deactivate(User $user) {
 
         try {
 
-            $user->update(['status' => 'inactive']);
+            $user->status = 'inactive';
 
-            return redirect()->back()->with('success', 'User has beed deactivate successfuly');
+            if($user->save()) {
+
+                return redirect()->back()->with('success', 'User has beed deactivate successfuly');
+            }
 
         } catch (\Exception $e) {
 
             return redirect()->back()->with('error', 'Opps! Something went wrong. ' . $e->getMessage());
         }
-
     }
 
+    /**
+     * reactivate a user
+     *
+     * @param object $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function reactivate(User $user) {
 
         try {
 
-            $user->update(['status' => 'active']);
+            $user->status = 'active';
 
-            return redirect()->back()->with('success', 'User has beed deactivate successfuly');
+            if ($user->save()) {
+
+                return redirect()->back()->with('success', 'User has beed deactivate successfuly');
+            }
 
         } catch (\Exception $e) {
-
 
             return redirect()->back()->with('error', 'Opps! Something went wrong. ' . $e->getMessage());
         }

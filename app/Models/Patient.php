@@ -38,12 +38,6 @@ class Patient extends Model
         'appointment_date',
     ];
 
-    public function user()
-    {
-
-        return $this->belongsTo('App\User');
-    }
-
     /**
      * get name function
      *

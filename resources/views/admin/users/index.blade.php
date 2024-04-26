@@ -13,19 +13,24 @@
             @foreach ($users as $user)
                 <tr class="odd gradeX">
                     <td>{{ $user->name }}</td>
-                    <td>{{ $user->role === 2 ? 'Patient' : 'Doctor' }}</td>
-                    <td>{{ $user->status }}</td>
-                    {{-- <td>
-                        <span class="badge badge-{{ $appointment->getStatus() === 'Pending' ? 'danger' : 'success' }}">
-                            {{ $appointment->getStatus() }}
-                        </span>
-                    </td> --}}
+                    <td>{{ $user->role === 2 ? 'Patient' : 'Healthcare' }}</td>
                     <td>
-                        <a href="{{ route('user.deactivate', $user->id) }}"
-                            class="btn btn-info btn-sm btn-icon icon-left">
-                            <i class="entypo-info"></i>
-                            deactivate
-                        </a>
+                        <span class="badge badge-{{ $user->getStatus() === 'Active' ? 'success' : 'secondary' }}">
+                            {{ $user->getStatus() }}
+                        </span>
+                    </td>
+                    <td>
+                        @if($user->getStatus() == 'Active')
+                            <a href="{{ route('user.deactivate', $user->id) }}"
+                                class="btn btn-dark btn-sm">
+                                Deactivate
+                            </a>
+                        @else
+                            <a href="{{ route('user.reactivate', $user->id) }}"
+                                class="btn btn-dark btn-sm">
+                                Reactivate
+                            </a>
+                        @endif
                     </td>
                 </tr>
             @endforeach
