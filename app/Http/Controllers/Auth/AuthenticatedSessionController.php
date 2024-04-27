@@ -35,10 +35,11 @@ class AuthenticatedSessionController extends Controller
         if ($status === 'active') {
 
             return redirect()->intended(RouteServiceProvider::HOME);
-
         } else {
 
-            return redirect()->back()->with('error', 'The account is inactive');
+            $this->destroy($request);
+
+            return redirect()->back()->with('error', 'Your account has been deactivated');
         }
     }
 

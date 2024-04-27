@@ -20,14 +20,12 @@
                         </span>
                     </td>
                     <td>
-                        @if($user->getStatus() == 'Active')
-                            <a href="{{ route('user.deactivate', $user->id) }}"
-                                class="btn btn-dark btn-sm">
+                        @if ($user->getStatus() == 'Active')
+                            <a href="{{ route('user.deactivate', $user->id) }}" class="btn btn-dark btn-sm">
                                 Deactivate
                             </a>
                         @else
-                            <a href="{{ route('user.reactivate', $user->id) }}"
-                                class="btn btn-dark btn-sm">
+                            <a href="{{ route('user.reactivate', $user->id) }}" class="btn btn-dark btn-sm">
                                 Reactivate
                             </a>
                         @endif

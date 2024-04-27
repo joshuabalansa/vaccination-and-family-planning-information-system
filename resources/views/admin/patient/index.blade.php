@@ -1,5 +1,6 @@
 <x-app-layout>
     <h2>Patient Records</h2><br />
+
     <table class="table table-bordered datatable" id="datatable">
         <thead>
             <tr>
@@ -24,12 +25,25 @@
                         </span>
                     </td>
                     <td>
-                        <a href="{{ route('patient.show', $appointment->id) }}"
-                            class="btn btn-info btn-sm btn-icon icon-left">
-                            <i class="entypo-info"></i>
-                            Info
-                        </a>
-                    </td>
+                        <li style="list-style: none;" class="dropdown language-selector">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+                                Options
+                            </a>
+
+                            <ul class="dropdown-menu pull-right">
+                                <li>
+                                    <a href="{{ route('patient.show', $appointment->id) }}" class="">
+                                        View Patient Information
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('patient.show', $appointment->id) }}" class="">
+                                        Patient Records
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </li>
                 </tr>
             @endforeach
         </tbody>

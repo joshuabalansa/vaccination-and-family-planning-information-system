@@ -64,7 +64,7 @@
 
             @if (auth()->user()->role === 2 || auth()->user()->role === 3)
                 <li class="active">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('vaccination.index') }}">
                         <i class="entypo-box"></i>
                         <span class="title">Vaccination</span>
                     </a>

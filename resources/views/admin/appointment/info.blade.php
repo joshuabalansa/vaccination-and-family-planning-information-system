@@ -1,6 +1,16 @@
 <x-app-layout>
     <h2>Patient Information</h2><br />
-
+    <div class="mt-3" style="margin-bottom: 10px;">
+        <a href="{{ route('appointment.records') }}" class="btn btn-sm btn-outline-primary">
+            Back
+        </a>
+        @if ($patient->getStatus() !== 'Approved')
+            <a href="{{ route('appointment.accept', $patient->id) }}" class="btn btn-success btn-sm btn-icon icon-left">
+                <i class="entypo-check"></i>
+                Approve
+            </a>
+        @endif
+    </div>
     <table class="table table-hover">
         <tbody>
             @foreach ($patient->toArray() as $field => $value)
@@ -19,16 +29,4 @@
             @endforeach
         </tbody>
     </table>
-
-    <div class="mt-3">
-        <a href="{{ route('appointment.records') }}" class="btn btn-primary">
-            Back
-        </a>
-        @if ($patient->getStatus() !== 'Approved')
-            <a href="{{ route('appointment.accept', $patient->id) }}" class="btn btn-success btn-sm btn-icon icon-left">
-                <i class="entypo-check"></i>
-                Approve
-            </a>
-        @endif
-    </div>
 </x-app-layout>

@@ -13,10 +13,10 @@ class SidebarMenuPolicy
      */
     public function viewAppointments(User $user)
     {
-        return $user->role === 1 || $user->role === 3;
+        return $user->role === 1;
     }
 
-   /**
+    /**
      * Patient Access
      * @param \App\Models\user $user
      * @return bool

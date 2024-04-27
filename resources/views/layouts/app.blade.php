@@ -11,8 +11,8 @@
     </title>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    {{-- <link rel="preconnect" href="https://fonts.bunny.net"> --}}
+    {{-- <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> --}}
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -25,6 +25,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/neon-theme.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/neon-forms.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+
+    {{-- Datatables --}}
+    <link rel="stylesheet" href="{{ asset('assets/js/datatables/datatables.css') }}"">
+    <link rel="stylesheet" href="{{ asset('assets/js/select2/select2-bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/js/select2/select2.css') }}">
     <script src="{{ asset('assets/js/jquery-1.11.3.min.js') }}"></script>
 
 </head>
@@ -62,12 +67,6 @@
     <script src="{{ asset('assets/js/neon-custom.js') }}"></script>
     <!-- Demo Settings -->
     <script src="{{ asset('assets/js/neon-demo.js') }}"></script>
-
-    {{-- Datatables --}}
-    <link rel="stylesheet" href="{{ asset('assets/js/datatables/datatables.css') }}"">
-    <link rel="stylesheet" href="{{ asset('assets/js/select2/select2-bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/js/select2/select2.css') }}">
-
     <script src="{{ asset('assets/js/datatables/datatables.js') }}"></script>
     <script src="{{ asset('assets/js/select2/select2.min.js') }}"></script>
     <script src="{{ asset('assets/js/neon-chat.js') }}"></script>
@@ -81,12 +80,17 @@
                     [10, 25, 50, -1],
                     [10, 25, 50, "All"]
                 ],
-                "bStateSave": true
+                "bStateSave": true,
+                responsive: true
             });
 
 
             $table1.closest('.dataTables_wrapper').find('select').select2({
                 minimumResultsForSearch: -1
+            });
+
+            $(window).on('resize', function() {
+                table.responsive.recalc();
             });
         });
     </script>
