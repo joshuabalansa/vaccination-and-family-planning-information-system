@@ -1,4 +1,4 @@
 <x-app-layout>
-    <h2>Vaccination</h2><br />
+    <h2>General</h2><br />
 
 </x-app-layout>

@@ -32,7 +32,7 @@
                     </div>
 
                     <h3>Patients</h3>
-                    <p>this is the all patient.</p>
+                    <p>this shows all patient.</p>
                 </div>
 
             </div>

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Traits;
+
 use GuzzleHttp\Client;
 // use Mailtrap\Config;
 // use Mailtrap\Helper\ResponseHelper;
@@ -18,7 +19,8 @@ trait SendNotificationTrait
      * @param string $message
      * @return void
      */
-    public function sendMessageNotification($apikey, $number, $message, $sender) {
+    public function sendMessageNotification($apikey, $number, $message, $sender)
+    {
 
         $client = new Client();
 
@@ -33,13 +35,11 @@ trait SendNotificationTrait
 
         try {
 
-           $client->post(env('SMS_API_URL'), $parameters);
-
+            $client->post(env('SMS_API_URL'), $parameters);
         } catch (\GuzzleHttp\Exception\RequestException $e) {
 
             \Log::error($e->getMessage());
         }
-
     }
 
     /**
@@ -47,9 +47,8 @@ trait SendNotificationTrait
      *
      * @return void
      */
-    public function sendEmailNotification() {
-
-        // require __DIR__ . '/vendor/autoload.php';
+    public function sendEmailNotification()
+    {
 
         // $apiKey = '';
         // $mailtrap = new MailtrapClient(new Config($apiKey));
@@ -70,4 +69,3 @@ trait SendNotificationTrait
         // var_dump(ResponseHelper::toArray($response));
     }
 }
-

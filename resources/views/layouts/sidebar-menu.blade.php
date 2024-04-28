@@ -43,7 +43,14 @@
                     <span class="title">Dashboard</span>
                 </a>
             </li>
-
+            @if (auth()->user()->role === 2)
+                <li class="active">
+                    <a href="{{ route('general.index') }}">
+                        <i class="entypo-menu"></i>
+                        <span class="title">General</span>
+                    </a>
+                </li>
+            @endif
             @if (auth()->user()->role === 2 || auth()->user()->role === 3)
                 <li class="active">
                     <a href="{{ route('schedule.index') }}">
@@ -52,7 +59,6 @@
                     </a>
                 </li>
             @endif
-
             @if (auth()->user()->role === 2)
                 <li class="active">
                     <a href="{{ route('dashboard') }}">

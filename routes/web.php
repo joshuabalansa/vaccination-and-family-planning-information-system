@@ -8,6 +8,8 @@ use App\Http\Controllers\VaccineController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\VaccinationController;
+use App\Http\Controllers\GeneralController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -76,6 +78,10 @@ Route::prefix('schedule')->group(function () {
 
 Route::prefix('vaccination')->group(function () {
     Route::get('/', [VaccinationController::class, 'index'])->name('vaccination.index');
+});
+
+Route::prefix('general')->group(function () {
+    Route::get('/', [GeneralController::class, 'index'])->name('general.index');
 });
 
 # Patient Routes Middleware

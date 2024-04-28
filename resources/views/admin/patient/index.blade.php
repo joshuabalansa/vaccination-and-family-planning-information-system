@@ -37,7 +37,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('patient.show', $appointment->id) }}" class="">
+                                    <a href="#" class="">
                                         Patient Records
                                     </a>
                                 </li>
